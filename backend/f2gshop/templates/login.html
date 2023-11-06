@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Food2Go</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <!-- ===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <!-- font awesome cdn link  -->
+    <script src="https://kit.fontawesome.com/c0294546ca.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+</head>
+<body>
+
+    <!-- header section starts -->
+    <header class="header">
+        <a href="/" class="logo"><i class="fas fa-shipping-fast"></i>Food2Go</a>
+    </header>
+    <!-- header section ends -->
+    
+    <!-- Login section starts -->
+    <h1>Login</h1>
+        {% block content %}
+        <form action="." method="POST">
+        {% csrf_token %}
+        {{ form.as_table }}
+        <button type="submit">Login</button>
+        </form>
+        {% endblock %}
+        <!-- Login section ends -->
+
+        <!-- Javascript for login section starts -->
+        <script>
+            // your script goes here
+            function formValidator(event){
+                event.preventDefault(); // always prevent default events when using javascript
+                // get the value the in the username box 
+                let username = document.getElementById("username").value; 
+                // get the value in the password box
+                let password = document.getElementById("password").value;
+                if( username == ""){
+                    alert("Username cannot be null");
+                }
+                else if (password == ""){
+                    alert("Password cannot be null");
+                }
+                else{
+                    alert("form is valid");
+                    fetch("http://127.0.0.1:8000/api/token/", {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({username: username, password: password})
+                    }).then(response=>response.json())
+                    .then(data=>{
+                        console.log(data); // still log it so we can debug
+                        if('access' in data){
+                        // successful login
+                        let accessToken = data['access'];
+                        let refreshToken = data['refresh'];
+                        localStorage.setItem("access", accessToken);
+                        localStorage.setItem("refresh", refreshToken);
+                        window.location.href = "/"; // the "/" is the homepage for node http://127.0.0.1:3000
+                    }
+                    else{
+                        alert("username or password invalid");
+                    }
+                });
+            }
+        }
+
+        let myform = document.getElementById("login-form"); // get the form 
+        myform.addEventListener('submit', formValidator); // bind the validator function to the submit button for the form
+
+        let req = "http://127.0.0.1:8000/api/products/"
+        fetch(req)
+        .then((response) => response.json())
+        .then(data => console.log(data));
+        </script>
+        <!-- Javascript for login section ends -->
+
+    <!-- custom js file link  -->
+    <script src="{% static 'js/regscript.js' %}"></script>
+    
+</body>
+</html>

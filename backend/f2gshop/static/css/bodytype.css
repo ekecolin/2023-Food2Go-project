@@ -1,0 +1,815 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+
+:root{
+    --black:#130f40;
+    --mint: #adefd1ff;
+    --dark-green:#4e691a;
+    --dark-blue:#00203fff ;
+    --box-shadow:0 .5rem 1.5rem rgba(0,0,0,.1);
+    --border:.2rem solid rgba(0,0,0,.1);
+    --outline:.1rem solid rgba(0,0,0,.1);
+    --outline-hover:.2rem solid var(--black);
+}
+
+*{
+    font-family: 'Poppins', sans-serif;
+    margin:0; padding:0;
+    box-sizing: border-box;
+    outline: none; border:none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: all .2s linear;
+}
+
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scroll-padding-top: 7rem;
+}
+
+/*Middle body of homepage*/
+body{
+    background:var(--mint);
+}
+
+section{
+    padding:2rem 9%;
+}
+
+/*Heading before ribboned text*/
+.heading{
+    text-align: center;
+    padding:2rem 0;
+    padding-bottom: 3rem;
+    font-size: 3.5rem;
+    color:var(--dark-blue);
+}
+
+/*Ribboned text*/
+.heading span{
+    background: var(--dark-green);
+    color:#fff;
+    display: inline-block;
+    padding:.5rem 3rem;
+    clip-path: polygon(100% 0, 93% 50%, 100% 99%, 0% 100%, 7% 50%, 0% 0%);
+}
+
+/*All Buttons, borders underneath pictures and hover colour*/
+.btn{
+    margin-top: 1rem;
+    display: inline-block;
+    padding:.8rem 3rem;
+    font-size: 1.7rem;
+    border-radius: .5rem;
+    border:.2rem solid var(--dark-blue);
+    color:var(--dark-blue);
+    cursor: pointer;
+    background: none;
+}
+
+.btn:hover{
+    background:var(--dark-green);
+    color:#fff;
+}
+
+/*Very top heading - navbar section incl. logo, logo image, nav text and icons*/
+.header{
+    position: fixed;
+    top:0; left:0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:2rem 9%;
+    background:var(--mint);
+    box-shadow: var(--box-shadow);
+}
+
+.header .logo{
+    font-size: 2.5rem;
+    font-weight: bolder;
+    color:var(--dark-blue);
+}
+
+.header .logo i{
+    color:var(--dark-green);
+}
+
+.header .navbar a{
+    font-size: 1.7rem;
+    font-weight: bolder;
+    margin:0 1rem;
+    color:var(--dark-blue);
+}
+
+.header .navbar a:hover{
+    color:var(--dark-green);
+}
+
+.header .icons div{
+    height: 4.5rem;
+    width: 4.5rem;
+    line-height: 4.5rem;
+    border-radius: .5rem;
+    background: var(--mint);
+    color:var(--dark-blue);
+    font-size: 2rem;
+    margin-left: .3rem;
+    cursor: pointer;
+    text-align: center;
+}
+
+.header .icons div:hover{
+    background: var(--dark-green);
+    color:#fff;
+}
+
+#menu-btn{
+    display: none;
+}
+
+/* Shopping cart icon settings*/
+.header .shopping-cart{
+    position: absolute;
+    top:110%; right:-110%;
+    padding:1rem;
+    border-radius: .5rem;
+    box-shadow: var(--box-shadow);
+    width:35rem;
+    background: #fff;
+}
+
+.header .shopping-cart.active{
+    right:2rem;
+    transition: .4s linear;
+}
+
+/* user icon settings */
+.header .login-form{
+    position: absolute;
+    top:110%; right:-110%;
+    width:35rem;
+    box-shadow: var(--box-shadow);
+    padding:2rem;
+    border-radius: .5rem;
+    background: #fff;
+    text-align: center;
+}
+
+.header .login-form.active{
+    right:2rem;
+    transition: .4s linear;
+}
+
+.home{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-position: center;
+    background-size: cover;
+    padding-top: 15rem;
+    padding-bottom: 4rem;
+}
+
+.home .content{
+    text-align: center;
+    width:60rem;
+}
+
+.home .content h3{
+    color:var(--dark-blue);
+    font-size: 7rem;
+}
+
+.home .content h3 span{
+    color:var(--dark-green);
+}
+
+.home .content p{
+    color:var(--dark-blue);
+    font-size: 1.7rem;
+    padding:1rem 0;
+    line-height: 1.8;
+}
+
+/* Bulking, stay lean and weight loss information structure - allows to put containers side by side with a gap*/
+.features .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap:1.5rem;
+}
+
+/* Button to allow popup window to appear with information for all section in the bodytype page - weightloss settings */
+.bodybtn1{
+    padding: 3px 25px;
+    background: #c9f5d9;
+    border: 0;
+    border:.2rem solid var(--dark-blue);
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 30px;
+}
+
+.bodybtn1:hover{
+    background:#4e691a;
+    color:#fff;
+}
+
+/* Staylean button settings */
+.bodybtn2{
+    padding: 3px 25px;
+    background: #b6d4ae;
+    border: 0;
+    border:.2rem solid var(--dark-blue);
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 30px;
+}
+
+.bodybtn2:hover{
+    background:#4e691a;
+    color:#fff;
+}
+
+/* Bulk button settings */
+.bodybtn3{
+    padding: 3px 25px;
+    background: #7cb896;
+    border: 0;
+    border:.2rem solid var(--dark-blue);
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 30px;
+}
+
+.bodybtn3:hover{
+    background:#4e691a;
+    color:#fff;
+}
+
+/* Pop up information for body type - pop, pop1 and pop2 are for each section
+   What is bulking, staylean and weight loss pop up window settings */
+.popup{
+    width: 400px;
+    background: #fff;
+    border-radius: 6px;
+    position:absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    text-align: center;
+    padding: 0 30px 30px;
+    color: #333;
+    visibility: hidden;
+    transition: transform 0.4s, top 0.4s;
+}
+
+.open-popup{
+    visibility: visible;
+    top: 95%;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popup h2{
+    font-size: 38px;
+    font-weight: 500;
+    margin: 30px 0 10px;
+}
+
+.popup button{
+    width: 100%;
+    margin-top: 50px;
+    padding: 10px 0;
+    background: #7cb896;
+    color: #fff;
+    border: 0;
+    outline: none;
+    font-size: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* How to bulk, stay lean, lose wieght pop up settings */
+.popup1{
+    width: 400px;
+    background: #fff;
+    border-radius: 6px;
+    position:absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    text-align: center;
+    padding: 0 30px 30px;
+    color: #333;
+    visibility: hidden;
+    transition: transform 0.4s, top 0.4s;
+}
+
+.open-popup1{
+    visibility: visible;
+    top: 95%;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popup1 h2{
+    font-size: 38px;
+    font-weight: 500;
+    margin: 30px 0 10px;
+}
+
+.popup1 ul li{
+    font-size: 14px;
+   }
+
+.popup1 button{
+    width: 100%;
+    margin-top: 50px;
+    padding: 10px 0;
+    background: #7cb896;
+    color: #fff;
+    border: 0;
+    outline: none;
+    font-size: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Tips to help popup settings */
+.popup2{
+    width: 400px;
+    background: #fff;
+    border-radius: 6px;
+    position:absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    text-align: center;
+    padding: 0 30px 30px;
+    color: #333;
+    visibility: hidden;
+    transition: transform 0.4s, top 0.4s;
+}
+
+.open-popup2{
+    visibility: visible;
+    top: 95%;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popup2 h2{
+    font-size: 38px;
+    font-weight: 500;
+    margin: 30px 0 10px;
+}
+
+.popup2 ul li{
+    font-size: 14px;
+   }
+
+.popup2 button{
+    width: 100%;
+    margin-top: 50px;
+    padding: 10px 0;
+    background: #7cb896;
+    color: #fff;
+    border: 0;
+    outline: none;
+    font-size: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Changes the colour when your in the popup window and you hover over 'OK' */
+.btn:hover{
+    background:#4e691a;
+    color:#fff;
+}
+
+/* Bulk, staylean, weight loss information settings within the box */
+.features .box-container .box{
+    padding:3rem 2rem;
+    background: #7cb896;
+    outline: var(--outline);
+    outline-offset: -1rem;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+}
+
+.features .box-container .box:hover{
+    outline: var(--outline-hover);
+    outline-offset: 0rem;
+}
+
+.features .box-container .box img{
+    margin:1rem 0;
+    height: 15rem;
+}
+
+.features .box-container .box h3{
+    font-size: 2.5rem;
+    line-height: 1.8;
+    color:var(--dark-blue);
+}
+
+.features .box-container .box p{
+    font-size: 1.5rem;
+    line-height: 1.8;
+    color:var(--dark-blue);
+    padding:1rem 0;
+}
+
+/*menu foods + recommendations - loss settings*/
+.foods .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap:1.5rem;
+}
+
+.foods .box-container .box{
+    padding:3rem 2rem;
+    background: #c9f5d9;
+    outline: var(--outline);
+    outline-offset: -1rem;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+}
+
+.foods .box-container .box:hover{
+    outline: var(--outline-hover);
+    outline-offset: 0rem;
+}
+
+.foods .box-container .box img{
+    margin:1rem 0;
+    height: 15rem;
+}
+
+.foods .box-container .box h3{
+    font-size: 2.5rem;
+    line-height: 1.8;
+    color:var(--dark-blue);
+}
+
+.foods .box-container .box p{
+    font-size: 1.5rem;
+    line-height: 1.8;
+    color:var(--dark-blue);
+    padding:1rem 0;
+}
+
+.foods .box .stars i{
+    font-size: 1.7rem;
+    color:var(--dark-green);
+    padding:.5rem 0;
+}
+
+/*menu foods + recommendations - lean settings*/
+.foods .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap:1.5rem;
+}
+
+.foods .box-container .box1{
+    padding:3rem 2rem;
+    background: #b6d4ae;
+    outline: var(--outline);
+    outline-offset: -1rem;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+}
+
+.foods .box-container .box1:hover{
+    outline: var(--outline-hover);
+    outline-offset: 0rem;
+}
+
+.foods .box-container .box1 img{
+    margin:1rem 0;
+    height: 15rem;
+}
+
+.foods .box-container .box1 h3{
+    font-size: 2.5rem;
+    line-height: 1.8;
+    color:var(--dark-blue);
+}
+
+.foods .box-container .box1 p{
+    font-size: 1.5rem;
+    line-height: 1.8;
+    color:var(--dark-blue);
+    padding:1rem 0;
+}
+
+.foods .box1 .stars i{
+    font-size: 1.7rem;
+    color:var(--dark-green);
+    padding:.5rem 0;
+}
+
+/*menu foods + recommended - bulk page*/
+.foods .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap:1.5rem;
+}
+
+.foods .box-container .box2{
+    padding:3rem 2rem;
+    background: #7cb896;
+    outline: var(--outline);
+    outline-offset: -1rem;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+}
+
+.foods .box-container .box2:hover{
+    outline: var(--outline-hover);
+    outline-offset: 0rem;
+}
+
+.foods .box-container .box2 img{
+    margin:1rem 0;
+    height: 15rem;
+}
+
+.foods .box-container .box2 h3{
+    font-size: 2.5rem;
+    line-height: 1.8;
+    color:var(--dark-blue);
+}
+
+.foods .box-container .box2 p{
+    font-size: 1.5rem;
+    line-height: 1.8;
+    color:var(--dark-blue);
+    padding:1rem 0;
+}
+
+.foods .box2 .stars i{
+    font-size: 1.7rem;
+    color:var(--dark-green);
+    padding:.5rem 0;
+}
+
+/* Most popular foods settings */
+.popmeals {
+    display: center;
+    flex-direction: column;
+}
+
+.popmealscontainer {
+    background: #7cb896;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    border-radius: 10px;
+    border-top: 6px solid #00203fff;
+    border-bottom: 6px solid #00203fff;
+    padding: 20px;
+    gap: 2rem;
+}
+
+.popimg {
+    height: 200px;
+    width: 200px;
+}
+
+.popimg img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+.popmealsbox {
+    flex: 1 1 8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.popmealsbox h3 {
+    font-size: 2rem;
+    font-weight: 900;;
+    color:#00203fff;
+    margin: 0 0 0.5rem;
+}
+
+.popmealsbox h2 {
+    font-size: 2rem;
+    color:#00203fff;
+    letter-spacing: 1px;
+}
+
+/*Review section possible*/
+.review .review-slider{
+    padding:1rem;
+}
+
+.review .review-slider .box{
+    background: #fff;
+    border-radius: .5rem;
+    text-align: center;
+    padding:3rem 2rem;
+    outline-offset: -1rem;
+    outline: var(--outline);
+    box-shadow: var(--box-shadow);
+    transition: .2s linear;
+}
+
+.review .review-slider .box:hover{
+    outline:var(--outline-hover);
+    outline-offset: 0rem;
+}
+
+.review .review-slider .box img{
+    height:10rem;
+    width:10rem;
+    border-radius: 50%;
+}
+
+.review .review-slider .box p{
+    padding:1rem 0;
+    line-height: 1.8;
+    color:var(--dark-blue);
+    font-size: 1.5rem;
+}
+
+.review .review-slider .box h3{
+    padding-bottom: .5rem;
+    color:var(--dark-blue);
+    font-size: 2.2rem;
+}
+
+.review .review-slider .box .stars i{
+    color:var(--dark-green);
+    font-size: 1.7rem;
+}
+
+/*Arrow to scroll up automatically*/
+.gotopbtn{
+    position: fixed;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background: var(--dark-green);
+    bottom: 40px;
+    right: 50px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 50px;
+    color: white;
+    font-size: 22px;
+  }  
+
+/* Footer section */
+.footer .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap:1.5rem;
+}
+
+.footer .box-container .box h3{
+    font-size: 2.5rem;
+    color:var(--dark-blue);
+    padding:1rem 0;
+}
+
+.footer .box-container .box h3 i{
+    color: var(--dark-green);
+}
+
+.footer .box-container .box .links{
+    display: block;
+    font-size: 1.5rem;
+    color:var(--dark-blue);
+    padding:1rem 0;
+}
+
+.footer .box-container .box .links i{
+    color:var(--dark-green);
+    padding-right: .5rem;
+}
+
+.footer .box-container .box .links:hover i{
+    padding-right: 2rem;
+}
+
+.footer .box-container .box p{
+    line-height: 1.8;
+    font-size: 1.5rem;
+    color:var(--dark-blue);
+    padding:1rem 0;
+}
+
+.footer .box-container .box .share a{
+    height:4rem;
+    width:4rem;
+    line-height:4rem;
+    border-radius: .5rem;
+    font-size: 2rem;
+    color:var(--dark-blue);
+    margin-right: .2rem;
+    background: var(--mint);
+    text-align: center;
+}
+
+.footer .box-container .box .share a:hover{
+    background: var(--dark-green);
+    color: #fff;
+}
+
+.footer .box-container .box .email{
+    width: 100%;
+    margin:.7rem 0;
+    padding:1rem;
+    border-radius: .5rem;
+    background: white;
+    font-size: 1.6rem;
+    color:var(--black);
+    text-transform: none;
+}
+
+.footer .box-container .box .payment-img{
+    margin-top: 2rem;
+    height: 3rem;
+    display: block;
+}
+
+.footer .credit{
+    text-align: center;
+    margin-top: 2rem;
+    padding:1rem;
+    padding-top: 2.5rem;
+    font-size: 2rem;
+    color:var(--dark-blue);
+    border-top: var(--border);
+}
+
+.footer .credit span{
+    color:var(--dark-green);
+}
+
+/* media queries that create responsiveness */
+@media (max-width:991px){
+    html{
+        font-size: 55%;
+    }
+    .header{
+        padding:2rem;
+    }
+    section{
+        padding:2rem;
+    }
+}
+
+@media (max-width:768px){
+    #menu-btn{
+        display: inline-block;
+    }
+    .header .search-form{
+        width:90%;
+    }
+    .header .navbar{
+        position: absolute;
+        top:110%; right:-110%;
+        width:30rem;
+        box-shadow: var(--box-shadow);
+        border-radius: .5rem;
+        background: #fff;
+    }
+    .header .navbar.active{
+        right:2rem;
+        transition: .4s linear;
+    }
+    .header .navbar a{
+        font-size: 2rem;
+        margin:2rem 2.5rem;
+        display: block;
+    }
+}
+
+@media (max-width:450px){
+    html{
+        font-size: 50%;
+    }
+    .heading{
+        font-size: 2.5rem;
+    }
+    .footer{
+        text-align: center;
+    }
+    .footer .box-container .box .payment-img{
+        margin: 2rem auto;
+    }
+}

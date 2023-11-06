@@ -1,0 +1,436 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Food2Go</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <script src="https://kit.fontawesome.com/c0294546ca.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+    
+    <!-- header section starts -->
+    <header class="header">
+        
+        <a href="/" class="logo"><i class="fas fa-shipping-fast"></i>Food2Go</a>
+
+        <nav class="navbar">
+            <a href="/">home</a>
+            <a href="ourmenu">our menu</a>
+            <a href="#features">features</a>
+            <a href="#bodytypes">categories</a>
+            <a href="#products">most popular</a>
+            <a href="#review">reviews</a>
+            <a href="previous_orders">your orders </a>
+        </nav>
+
+        <div class="icons">
+            <div class="fas fa-bars" id="menu-btn"></div>
+            <div class="fas fa-shopping-cart" id="cart-btn"></div>
+            <div class="fas fa-user" id="login-btn"></div>
+        </div>
+
+        <!-- Shopping basket section, if logged in you can add to basket and view + if your not logged in you cant view the basket -->
+        <div class="shopping-cart">
+            <form action="" class="login-form1">
+                {% if user.is_authenticated %}
+                {% if empty %}
+                  <h2 style="font-weight:bold; font-size:5rem;">Your shopping basket is empty.</h2>
+                  <p style="font-weight:bold">Lets add some meals to your basket</p>
+                  <a href="/ourmenu" class="btn">Our menu</a>
+                {% else %}
+                  <div class="nav-item">
+                    <a class = "nav-link" class="btn" href = "/basket" style="font-weight: bold; font-size: 16px; text-align: center; display: flex; justify-content: center; align-items: center;">Shopping basket</a>
+                  </div>
+                {% endif %}
+              {% else %}
+                <a class = "nav-link" class="btn" href = "/login" style="font-weight: bold; font-size: 16px; text-align: center; display: flex; justify-content: center; align-items: center;">Login to use basket</a>
+              {% endif %}
+            </form>
+        </div>
+
+        <!-- User icon - allows user to login. register and logout -->
+        <form action="" class="login-form">
+            <div class="nav-item">
+              {% if user.is_authenticated %}
+              <a class = "nav-link" class="btn" href = "/logout" style="font-weight: bold; font-size: 16px;">Logout</a>
+              {% else %}
+              <a class = "nav-link" class="btn" href = "/login" style="font-weight: bold; font-size: 16px;">Login</a>
+              <a class = "nav-link" class="btn" href = "/register" style="font-weight: bold; font-size: 16px;">Register</a>
+              {% endif %}
+            </div>
+        </form>
+
+    </header>
+    <!-- header section ends -->
+
+    <!-- home section starts  -->
+    <section class="home" id="home">
+
+        <div class="content">
+            <h3>fresh and <span>organic</span> products for you</h3>
+            <p>A mix of various ingredients combined to trigger your taste buds while providing you with a nutrious and healthy lifestyle</p>
+            <a href="ourmenu" class="btn">shop now</a>
+        </div>
+
+    </section>
+    <!-- home section ends -->
+
+    <!-- features section starts  -->
+    <section class="features" id="features">
+
+        <h1 class="heading"> our <span>features</span> </h1>
+
+        <div class="box-container">
+
+            <div class="box">
+                <img src="{% static 'img/chef-cooking.jpg' %}" alt="Fresh and organic">
+                <h3>fresh and organic</h3>
+                <p>The ingredients used are organically produced and throughly examined before usage</p>
+            </div>
+
+            <div class="box">
+                <img src="{% static 'img/delivery.jpg' %}" alt="Free delivery">
+                <h3>free delivery</h3>
+                <p>No extra charges involved when you are ordering</p>
+            </div>
+
+            <div class="box">
+                <img src="{% static 'img/mobile-payment.jpg' %}" alt="Easy payments">
+                <h3>easy payments</h3>
+                <p>Paying online has never been made easier, with the simple click of a few buttons</p>
+            </div>
+
+        </div>
+
+    </section>
+    <!-- features section ends -->
+
+    <!-- categories section starts  -->
+    <section class="bodytypes" id="bodytypes">
+
+        <h1 class="heading"> Select your <span>body type</span> </h1>
+        
+        <div class="box-container">
+            
+            <div class="box">
+                <a href="weightloss"><img src="{% static 'img/losswoman.png' %}"></a>
+                <h3>Weight loss</h3>
+                <p>Want to lose weight, to become a better you?</p>
+                <a href="weightloss" class="btn">Lets begin</a>
+            </div>
+
+            <div class="box1">
+                <a href="staylean"><img src="{% static 'img/leancouple.png' %}"></a>
+                <h3>stay lean</h3>
+                <p>Want to get that toned look, to feel better?</p>
+                <a href="staylean" class="btn">Lets begin</a>
+            </div>
+
+            <div class="box2">
+                <a href="bulk"><img src="{% static 'img/musclegain.png' %}"></a>
+                <h3>bulk up</h3>
+                <p>Need more muscle to lift the world?</p>
+                <a href="bulk" class="btn">Lets begin</a>
+            </div>
+
+            <div class="box3">
+                <a href="bmi"><img src="{% static 'img/bmigreen.png' %}"></a>
+                <h3>BMI calculator</h3>
+                    <p>Unsure of which body type to go for?</p>
+                <a href="bmi" class="btn">Check your BMI</a>
+            </div>
+
+        </div>
+
+    </section>
+    <!-- categories section ends -->
+
+    <!-- weight graph tracker section starts  -->
+    <section class="chart" id="chart">
+
+        <h1 class="heading"> Track <span>your weight</span> </h1>
+        
+        <div class="box-container">
+            
+            <div class="box4">
+                <a href="chart"><img src="{% static 'img/weighttracker.png' %}"></a>
+                <h3>Weight Graph Tracker</h3>
+                <p>Lets have a look at how your weight has been doing</p>
+                <a href="chart" class="btn">Lets begin</a>
+            </div>
+
+        </div>
+
+    </section>
+    <!-- weight graph tracker section ends -->
+
+    <!-- products section starts -->
+    <section class="products" id="products">
+        
+        <h1 class="heading"> most popular <span>meals</span> </h1>
+        
+        <div class="swiper product-slider">
+            
+            <div class="swiper-wrapper">
+                
+                <div class="swiper-slide box" style="background: #b6d4ae;">
+                    <a href="/products/8"><img src="{% static 'img/avocado_blackbean_eggs.png' %}" alt="Avocado & Black Bean Eggs"></a> 
+                    <h3>Avocado Black Bean Eggs</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <a href="/products/8" class="btn">read more</a>
+                    <a href="/addbasket/{{8}}" class="btn">add to cart</a>
+                </div>
+                
+                <div class="swiper-slide box" style="background: #7cb896;">
+                    <a href="/products/11"><img src="{% static 'img/Creamy-Oatmeal-Porridge-with-Banana-and-Peanut-Butter.png' %}" alt="Creamy Porridge"></a>
+                    <h3>Creamy Porridge</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <a href="/products/11" class="btn">read more</a>
+                    <a href="/addbasket/{{11}}" class="btn">add to cart</a>
+                </div>
+
+                <div class="swiper-slide box" style="background: #7cb896;">
+                    <a href="/products/24"><img src="{% static 'img/chicken-Shawarma-Salad.png' %}" alt="Chicken Shawarma"></a>
+                    <h3>Chicken Shawarma</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <a href="/products/24" class="btn">read more</a>
+                    <a href="/addbasket/{{24}" class="btn">add to cart</a>
+                </div>
+
+                <div class="swiper-slide box" style="background: #7cb896;">
+                    <a href="/products/34"><img src="{% static 'img/appleporkchops.png' %}" alt="Apple & Onion Pork Chops"></a>
+                    <h3>Apple & Onion Pork Chops</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <a href="/products/34" class="btn">read more</a>
+                    <a href="/addbasket/{{34}}" class="btn">add to cart</a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="swiper product-slider">
+            
+            <div class="swiper-wrapper">
+                
+                <div class="swiper-slide box" style="background: #b6d4ae;">
+                    <a href="/products/17"><img src="{% static 'img/honeyed-sweet-potato-almond-and-sprout-salad.png' %}" alt="Sprout Salad"></a>
+                    <h3>Sprout Salad</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <a href="/products/17" class="btn">read more</a>
+                    <a href="addbasket/{{17}}" class="btn">add to cart</a>
+                </div>
+
+                <div class="swiper-slide box" style="background: #c9f5d9;">
+                    <a href="/products/25"><img src="{% static 'img/spanish-chicken-beans.png' %}" alt="Spanish Chicken And Beans"></a>
+                    <h3>Spanish Chicken & Beans</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <a href="/products/25" class="btn">read more</a>
+                    <a href="addbasket/{{25}}" class="btn">add to cart</a>
+                </div>
+
+                <div class="swiper-slide box" style="background: #b6d4ae;">
+                    <a href="/products/6"><img src="{% static 'img/poached-eggs-with-broccoli-tomatoes-wholemeal-flatbread.png' %}" alt="Poached Eggs & Flatbread"></a>
+                    <h3>Poached Eggs & Flatbread</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <a href="/products/6" class="btn">read more</a>
+                    <a href="addbasket/{{6}}" class="btn">add to cart</a>
+                </div>
+
+                <div class="swiper-slide box" style="background: #b6d4ae;">
+                    <a href="/products/30"><img src="{% static 'img/Beef-Black-Bean-Sauce.png' %}" alt="Beef & Black Bean Sauce"></a>
+                    <h3>Beef & Black Bean Sauce</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <a href="/products/30" class="btn">read more</a>
+                    <a href="addbasket/{{30}}" class="btn">add to cart</a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-- products section ends -->
+
+    <!-- review section starts  -->
+    <section class="review" id="review">
+        
+        <h1 class="heading"> customer <span>reviews</span> </h1>
+        
+        <div class="swiper review-slider">
+            
+            <div class="swiper-wrapper">
+                
+                <div class="swiper-slide box">
+                    <img src="{% static 'img/pic-1.png' %}" alt="Picture of Chris">
+                    <p>Super fast delivery and great service. If your a food enthusiast you definitely should take a look at this site</p>
+                    <h3>Chris Newton</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'img/pic-2.png' %}" alt="Picture of Maria">
+                    <p>Very excellent business and very sustainable for me and very convinient for us. This is very affordable food.</p>
+                    <h3>Maria Faro</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'img/pic-3.png' %}" alt="Picture of Joe">
+                    <p>Good food and good service... I would highly recommended them to anyone and i will be ordering again.</p>
+                    <h3>Joe James</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'img/pic-4.png' %}" alt="Picture of Lily">
+                    <p>This site is really neat. I love the food and service. Highly recommended them to anyone who is looking for meals prepared.</p>
+                    <h3>Lily Johnson</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-- review section ends  -->
+
+    <!-- footer section starts  -->
+    <section class="footer">
+
+        <div class="box-container">
+
+            <div class="box">
+                <h3> <i class="fas fa-shipping-fast"></i> Food2Go </h3>
+                <p>“It Is Health That Is Real Wealth And Not Pieces Of Gold And Silver.” – Mahatma Gandhi.</p>
+                <div class="share">
+                    <a href="https://www.facebook.com/" class="fab fa-facebook-f"></a>
+                    <a href="https://twitter.com/" class="fab fa-twitter"></a>
+                    <a href="https://www.instagram.com/" class="fab fa-instagram"></a>
+                    <a href="https://ie.linkedin.com/" class="fab fa-linkedin"></a>
+                </div>
+            </div>
+
+            <div class="box">
+                <h3>contact info</h3>
+                <a href="#" onclick="return false;" class="links"> <i class="fas fa-phone"></i> +123-456-7890 </a>
+                <a href="#" onclick="return false;" class="links"> <i class="fas fa-phone"></i> +111-222-3333 </a>
+                <a href="https://mail.google.com/mail/u/0/#inbox" class="links"> <i class="fas fa-envelope"></i> colin.ekedigwe2@mail.dcu.ie </a>
+                <a href="https://mail.google.com/mail/u/0/#inbox" class="links"> <i class="fas fa-envelope"></i> gideon.amaechi2@mail.dcu.ie </a>
+                <a href="https://www.google.com/maps/place/North+City,+Dublin+1,+D01+P767/@53.3503011,-6.2562243,15z/data=!3m1!4b1!4m5!3m4!1s0x48670e85f02ee71d:0x9f56abb85cd807b7!8m2!3d53.3503017!4d-6.2562243" class="links"> <i class="fas fa-map-marker-alt"></i> dublin, ireland - D01P767 </a>
+            </div>
+
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="/" class="links"> <i class="fas fa-arrow-right"></i> home </a>
+                <a href="ourmenu.html" class="links"> <i class="fas fa-arrow-right"></i> our menu </a>
+                <a href="#features" class="links"> <i class="fas fa-arrow-right"></i> features </a>
+                <a href="#bodytypes" class="links"> <i class="fas fa-arrow-right"></i> categories </a>
+                <a href="#products" class="links"> <i class="fas fa-arrow-right"></i> most popular </a>
+                <a href="#review" class="links"> <i class="fas fa-arrow-right"></i> review </a>
+                <a href="previous_orders" class="links"> <i class="fas fa-arrow-right"></i> your orders </a>
+            </div>
+
+            <div class="box">
+                <h3>payments</h3>
+                <img src="{% static 'img/payment.png' %}" class="payment-img" alt="Payment">
+            </div>
+
+        </div>
+
+        <div class="credit"> created by <span> Colin Ekedigwe & Gideon Amaechi </span> | 20403046 & 20364806 </div>
+    
+    </section>
+    <!-- footer section ends -->
+    
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+    <!-- custom js file link  -->
+    <script src="{% static 'js/script.js' %}"></script>
+
+    <!-- Arrow that leads you back =to the top of the page -->
+    <a class="gotopbtn" href="#"> <i class="fas fa-arrow-up"></i></a>
+
+</body>
+</html>

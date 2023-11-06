@@ -1,0 +1,489 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stay lean | Food2Go</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <script src="https://kit.fontawesome.com/c0294546ca.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'css/bodytype.css' %}">
+</head>
+<body1>
+    
+    <!-- header section starts -->
+    <header class="header">
+
+        <a href="/" class="logo"><i class="fas fa-shipping-fast"></i>Food2Go</a>
+
+        <nav class="navbar">
+            <a href="/">home</a>
+            <a href="ourmenu">our menu</a>
+            <a href="#features">lean info</a>
+            <a href="#foods">foods</a>
+            <a href="#products">recommendations</a>
+            <a href="#popmeals">popular</a>
+            <a href="#review">reviews</a>
+            <a href="/chart">Weight tracker</a>
+        </nav>
+
+        <div class="icons">
+            <div class="fas fa-bars" id="menu-btn"></div>
+            <div class="fas fa-shopping-cart" id="cart-btn"></div>
+            <div class="fas fa-user" id="login-btn"></div>
+        </div>
+
+        <!-- Shopping basket section, if logged in you can add to basket and view + if your not logged in you cant view the basket -->
+        <div class="shopping-cart">
+            <form action="" class="login-form1">
+                {% if user.is_authenticated %}
+                {% if empty %}
+                  <h2 style="font-weight:bold; font-size:5rem;">Your shopping basket is empty.</h2>
+                  <p style="font-weight:bold">Lets add some meals to your basket</p>
+                  <a href="/ourmenu" class="btn">Our menu</a>
+                {% else %}
+                  <div class="nav-item">
+                    <a class = "nav-link" class="btn" href = "/basket" style="font-weight: bold; font-size: 16px; text-align: center; display: flex; justify-content: center; align-items: center;">Shopping basket</a>
+                  </div>
+                {% endif %}
+              {% else %}
+                <a class = "nav-link" class="btn" href = "/login" style="font-weight: bold; font-size: 16px; text-align: center; display: flex; justify-content: center; align-items: center;">Login to use basket</a>
+              {% endif %}
+            </form>
+        </div>
+
+        <!-- User icon - allows user to login. register and logout -->
+        <form action="" class="login-form">
+            <div class="nav-item">
+            {% if user.is_authenticated %}
+                <a class = "nav-link" class="btn" href = "/logout" style="font-weight: bold; font-size: 16px;">Logout</a>
+            {% else %}
+                <a class = "nav-link" class="btn" href = "/login" style="font-weight: bold; font-size: 16px;">Login</a>
+                <a class = "nav-link" class="btn" href = "/register" style="font-weight: bold; font-size: 16px;">Register</a>
+            {% endif %}
+            </div>
+        </form>
+
+    </header>
+    <!-- header section ends -->
+
+    <!-- home section starts  -->
+    <section class="home" id="home">
+
+        <div class="content">
+            <h3> Stay <span>Lean</span></h3>
+            <p><span style="font-weight:bold">Commit to feeling your best</span></p>
+            <a href="/basket" class="btn">Your basket</a>
+        </div>
+
+    </section>
+    <!-- home section ends -->
+
+    <!-- Lean information starts -->
+    <section class="features" id="features">
+
+        <h1 class="heading"> Lean <span>Information</span> </h1>
+
+        <div class="box-container">
+
+            <div class="box" style="background: #b6d4ae">
+                <img src="{% static 'img/lean1.png' %}" alt="What is lean">
+                <button type="button" class="bodybtn2" onclick="openPopup()"><p><span style="font-weight:bold">What is lean?</span></p></button>
+                <div class="popup" id="popup">
+                    <h2>What is lean?</h2>
+                    <p>Being lean means having a low body fat percentage.</p>
+                    <button type="button" class="btn" onclick="closePopup()">OK</button>
+                </div>
+            </div>
+
+            <div class="box" style="background: #b6d4ae">
+                <img src="{% static 'img/lean2.png' %}" alt="How to stay lean">
+                <button type="button" class="bodybtn2" onclick="openPopup1()"><p><span style="font-weight:bold">How to stay lean?</span></p></button>
+                <div class="popup1" id="popup1">
+                    <h2>How to stay lean?</h2>
+                    <ul style="list-style-type: none">
+                        <li>1. Track Your Macros.</li>
+                        <li>2. Keep Up The Cardio.</li>
+                        <li>3. Know Your TDEE.</li>
+                        <li>4. Eat Properly Around Your Training.</li>
+                        <li>5. Lift Heavy.</li>
+                    </ul>
+                    <button type="button" class="btn" onclick="closePopup1()">OK</button>
+                </div>
+            </div>
+
+            <div class="box" style="background: #b6d4ae">
+                <img src="{% static 'img/lean3.png' %}" alt="Some Tips to stay lean">
+                <button type="button" class="bodybtn2" onclick="openPopup2()"><p><span style="font-weight:bold">Some Tips to stay lean</span></p></button>
+                <div class="popup2" id="popup2">
+                    <h2>Some Tips to stay lean</h2>
+                    <ul style="list-style-type: none">
+                        <li>1. Reduce mindless eating.</li>
+                        <li>2. Be sure to get adequate protein at each meal.</li>
+                        <li>3. Boost your vitamin D intake.</li>
+                        <li>4. Get Enough Sleep.</li>
+                        <li>5. Eat plant-based meals and snacks.</li>
+                    </ul>
+                    <button type="button" class="btn" onclick="closePopup2()">OK</button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- Lean information ends -->
+
+    <!-- Breakfast meal options starts-->
+    <section class="foods" id="foods">
+
+        <h1 class="heading"> our <span>Breakfast</span> </h1>
+
+        <div class="box-container">
+
+            <div class="box1">
+                <a href="/products/5"><img src="{% static 'img/salmon-and-eggs.png' %}" alt="Stone Baked Salmon & Eggs"></a>
+                <h3>Stone Baked Salmon & Eggs</h3>
+                <p>Something different with your eggs and smoked salmon by baking into a bread roll.</p>
+                <a href="/products/5" class="btn">read more</a>
+                <a href="addbasket/{{5}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box1">
+                <a href="/products/6"><img src="{% static 'img/poached-eggs-with-broccoli-tomatoes-wholemeal-flatbread.png' %}" alt="Poached Eggs & Flatbread"></a>
+                <h3>Poached Eggs & Flatbread</h3>
+                <p>Start your day right! this breakfast also includes fresh broccoli and tomatoes.</p>
+                <a href="/products/6" class="btn">read more</a>
+                <a href="addbasket/{{6}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box1">
+                <a href="/products/7"><img src="{% static 'img/Protein-pancakes.png' %}" alt="Perfect Protein Pancakes"></a>
+                <h3>Perfect Protein Pancakes</h3>
+                <p>These fluffy and light pancakes are made with eggs, oats, milk and protein powder.</p>
+                <a href="/products/7" class="btn">read more</a>
+                <a href="addbasket/{{7}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box1">
+                <a href="/products/8"><img src="{% static 'img/avocado_blackbean_eggs.png' %}" alt="Avocado & Black Bean Eggs"></a>
+                <h3>Avocado & Black Bean Eggs</h3>
+                <p>Set yourself up for the day with this veggie breakfast with eggs, avocado and black beans.</p>
+                <a href="/products/8" class="btn">read more</a>
+                <a href="addbasket/{{8}}" class="btn">add to cart</a>
+            </div>
+            
+        </div>
+
+    </section>
+    <!-- Breakfast meal options ends-->
+
+    <!--Lunch meal options starts-->
+    <section class="foods" id="foods">
+
+        <h1 class="heading"> our <span>Lunch</span> </h1>
+
+        <div class="box-container">
+
+            <div class="box1">
+                <a href="/products/17"><img src="{% static 'img/honeyed-sweet-potato-almond-and-sprout-salad.png' %}" alt="Sprout Salad"></a>
+                <h3>Sprout salad</h3>
+                <p>With a super-healthy honeyed sweet potato salad & almonds.</p>
+                <a href="/products/17" class="btn">read more</a>
+                <a href="addbasket/{{17}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box1">
+                <a href="/products/18"><img src="{% static 'img/chicken-wholegrain-sandwich.png' %}" alt="Roasted Sandwich"></a>
+                <h3>Roasted Sandwich</h3>
+                <p>With Chicken, mustard, watercress and roasted capsicum.</p>
+                <a href="/products/18" class="btn">read more</a>
+                <a href="addbasket/{{18}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box1">
+                <a href="/products/19"><img src="{% static 'img/pasta-salad-with-lentils-pesto-beans.png' %}" alt="Pasta Salad"></a>
+                <h3>Pasta salad</h3>
+                <p>with lentils, pesto & beans. A flavourful energy meal.</p>
+                <a href="/products/19" class="btn">read more</a>
+                <a href="addbasket/{{19}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box1">
+                <a href="/products/20"><img src="{% static 'img/bunless-burger.png' %}" alt="Bunless Burger"></a>
+                <h3>Bunless burger</h3>
+                <p>with Rosemary Potato Wedges and a Sweetcorn & Pepper Salad.</p>
+                <a href="/products/20" class="btn">read more</a>
+                <a href="addbasket/{{20}}" class="btn">add to cart</a>
+            </div>
+            
+        </div>
+
+    </section>
+    <!--Lunch meal options ends-->
+
+    <!--Dinner meal options starts-->
+    <section class="foods" id="foods">
+
+        <h1 class="heading"> our <span>Dinner</span> </h1>
+
+        <div class="box-container">
+
+            <div class="box1">
+                <a href="/products/29"><img src="{% static 'img/red-thai-curry.png' %}" alt="Red Thai Curry With Jasminerice"></a>
+                <h3>Red Thai Curry with jasminerice</h3>
+                <a href="/products/29" class="btn">read more</a>
+                <a href="addbasket/{{29}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box1">
+                <a href="/products/30"><img src="{% static 'img/Beef-Black-Bean-Sauce.png' %}" alt="Beef & Black Bean Sauce"></a>
+                <h3>Jamaican Beef & Black Bean Sauce</h3>
+                <a href="/products/30" class="btn">read more</a>
+                <a href="addbasket/{{30}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box1">
+                <a href="/products/31"><img src="{% static 'img/piri-piri-chicken.png' %}" alt="Piri Piri Chicken & Lentil Rice"></a>
+                <h3>Piri Piri Chicken & short lentil rice</h3>
+                <a href="/products/31" class="btn">read more</a>
+                <a href="addbasket/{{31}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box1">
+                <a href="/products/32"><img src="{% static 'img/white-wine-chicken.png' %}" alt="White Wine Chicken With Root Veg"></a>
+                <h3>White Wine Chicken with root veg</h3>
+                <a href="products/32" class="btn">read more</a>
+                <a href="addbasket/{{32}}" class="btn">add to cart</a>
+            </div>
+            
+        </div>
+
+    </section>
+    <!--Dinner meal options ends-->
+    
+    <!-- Food recommendations starts-->
+    <section class="foods" id="foods" style="margin-top: 50px;">
+
+        <h1 class="heading"> our <span>Recommmendations</span> </h1>
+        
+        <div class="box-container">
+            {% for p in recommendations %}
+            <div class="box1">
+                <a href="/products/{{p.id}}"><img src="{{p.image.url}}" alt="{{p.name}}"></a>
+                <h3>{{p.name}}</h3>
+                <div class="stars"></div>
+                    <a href="/products/{{p.id}}" class="btn">read more</a>
+                  <a href="/addbasket/{{p.id}}" class="btn">add to cart</a>
+            </div>
+            {% endfor %}
+        
+        </div>
+        
+    </section>
+    <!-- Food recommendations ends-->
+    
+    <!-- Javascript that produces the starts for the recommneded products starts -->
+    <script>
+        function generateStars() {
+            const fullStars = Math.floor(Math.random() * 2) + 3; // Generates a random number between 3 and 4
+            const hasHalfStar = Math.random() < 0.5; // 50% chance of having a half star
+                
+            const containers = document.querySelectorAll('.stars');
+                
+            for (let i = 0; i < containers.length; i++) { // function then iterates over each container using a for loop.
+                const container = containers[i];
+                container.innerHTML = ''; // Clear any existing stars
+                    
+                for (let j = 0; j < fullStars; j++) { //  adds a number of full stars to the container using another for loop, based on the random number generated earlier.
+                    const star = document.createElement('i');
+                    star.classList.add('fas', 'fa-star');
+                    container.appendChild(star);
+                }
+                    
+                if (hasHalfStar) {
+                    const halfStar = document.createElement('i');
+                    halfStar.classList.add('fas', 'fa-star-half-alt');
+                    container.appendChild(halfStar);
+                 }
+            }
+        }
+            
+        window.addEventListener('load', generateStars); // used to run the generateStars() function when the page finishes loading.
+    </script>
+    <!-- Javascript that produces the starts for the recommneded products ends -->
+
+    <!-- Most popular meals starts -->
+    <section class="popmeals" id="popmeals">
+
+        <h1 class="heading"> Most Popular <span>Meals</span> </h1>
+
+        <div class="popmealscontainer" style="background: #b6d4ae">
+            <div class="popmealsbox">
+                <div class="popimg">
+                    <a href="/products/30"><img src="{% static 'img/Beef-Black-Bean-Sauce.png' %}" alt="Beef & Black Bean Sauce"></a>
+                </div>
+                <h3>Beef & Black Bean Sauce</h3>
+                <h2>€5.00</h2>
+            </div>
+
+            <div class="popmealsbox">
+                <div class="popimg">
+                    <a href="/products/32"><img src="{% static 'img/white-wine-chicken.png' %}" alt="White Wine Chicken With Root Veg"></a>
+                </div>
+                <h3>Wine Chicken With Veg</h3>
+                <h2>€5.00</h2>
+            </div>
+
+            <div class="popmealsbox">
+                <div class="popimg">
+                    <a href="/products/18"><img src="{% static 'img/chicken-wholegrain-sandwich.png' %}" alt="Roasted Sandwich"></a>
+                </div>
+                <h3>Roasted Sandwich</h3>
+                <h2>€5.00</h2>
+            </div>
+
+            <div class="popmealsbox">
+                <div class="popimg">
+                    <a href="/products/7"><img src="{% static 'img/Protein-pancakes.png' %}" alt="Perfect Protein Pancakes"></a>
+                </div>
+                <h3>Perfect Protein Pancakes</h3>
+                <h2>€5.00</h2>
+            </div>
+            
+        </div>
+
+    </section>
+    <!-- Most popular meals ends -->
+
+    <!-- Customer reviews starts-->
+    <section class="review" id="review">
+        
+        <h1 class="heading"> customer <span>reviews</span> </h1>
+        
+        <div class="swiper review-slider">
+            
+            <div class="swiper-wrapper">
+                
+                <div class="swiper-slide box">
+                    <img src="{% static 'img/pic-1.png' %}" alt="Picture of Chris">
+                    <p>Super fast delivery and great service. If your a food enthusiast you definitely should take a look at this site</p>
+                    <h3>Chris Newton</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'img/pic-2.png' %}" alt="Picture of Maria">
+                    <p>Very excellent business and very sustainable for me and very convinient for us. This is very affordable food.</p>
+                    <h3>Maria Faro</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'img/lean-3.png' %}" alt="Picture of Mark">
+                    <p>One of my favourite places to come to to order my meals and stay in great shape, highly recommended.</p>
+                    <h3>Mark Rogers</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'img/lean-4.png' %}" alt="Picture of Tobi">
+                    <p>I recently ordered the bunless burger and the stone baked salmon & eggs and it was a serious banger.</p>
+                    <h3>Tobi Jermaine</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-- Customer reviews ends -->
+
+    <!-- footer section starts -->
+    <section class="footer">
+
+        <div class="box-container">
+
+            <div class="box">
+                <h3> <i class="fas fa-shipping-fast"></i> Food2Go </h3>
+                <p>“It Is Health That Is Real Wealth And Not Pieces Of Gold And Silver.” – Mahatma Gandhi.</p>
+                <div class="share">
+                    <a href="https://www.facebook.com/" class="fab fa-facebook-f"></a>
+                    <a href="https://twitter.com/" class="fab fa-twitter"></a>
+                    <a href="https://www.instagram.com/" class="fab fa-instagram"></a>
+                    <a href="https://ie.linkedin.com/" class="fab fa-linkedin"></a>
+                </div>
+            </div>
+
+            <div class="box">
+                <h3>contact info</h3>
+                <a href="#" onclick="return false;" class="links"> <i class="fas fa-phone"></i> +123-456-7890 </a>
+                <a href="#" onclick="return false;" class="links"> <i class="fas fa-phone"></i> +111-222-3333 </a>
+                <a href="https://mail.google.com/mail/u/0/#inbox" class="links"> <i class="fas fa-envelope"></i> colin.ekedigwe2@mail.dcu.ie </a>
+                <a href="https://mail.google.com/mail/u/0/#inbox" class="links"> <i class="fas fa-envelope"></i> gideon.amaechi2@mail.dcu.ie </a>
+                <a href="https://www.google.com/maps/place/North+City,+Dublin+1,+D01+P767/@53.3503011,-6.2562243,15z/data=!3m1!4b1!4m5!3m4!1s0x48670e85f02ee71d:0x9f56abb85cd807b7!8m2!3d53.3503017!4d-6.2562243" class="links"> <i class="fas fa-map-marker-alt"></i> dublin, ireland - D01P767 </a>
+            </div>
+
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="/" class="links"> <i class="fas fa-arrow-right"></i> home </a>
+                <a href="ourmenu" class="links"> <i class="fas fa-arrow-right"></i> our menu </a>
+                <a href="#features" class="links"> <i class="fas fa-arrow-right"></i> lean info </a>
+                <a href="#foods" class="links"> <i class="fas fa-arrow-right"></i> foods </a>
+                <a href="#products" class="links"> <i class="fas fa-arrow-right"></i> recommendations </a>
+                <a href="#popmeals" class="links"> <i class="fas fa-arrow-right"></i> popular </a>
+                <a href="#review" class="links"> <i class="fas fa-arrow-right"></i> review </a>
+                <a href="chart" class="links"> <i class="fas fa-arrow-right"></i> Weight tracker</a>
+            </div>
+
+            <div class="box">
+                <h3>payments</h3>
+                <img src="{% static 'img/payment.png' %}" class="payment-img" alt="Payment">
+            </div>
+
+        </div>
+
+        <div class="credit"> created by <span> Colin Ekedigwe & Gideon Amaechi </span> | 20403046 & 20364806 </div>
+
+    </section>
+    <!-- footer section ends -->
+
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+    <!-- custom js file link  -->
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/bodytype.js' %}"></script>
+
+    <!-- Arrow that leads you back =to the top of the page -->
+    <a class="gotopbtn" href="#"> <i class="fas fa-arrow-up"></i> </a>
+
+</body1>
+</html>

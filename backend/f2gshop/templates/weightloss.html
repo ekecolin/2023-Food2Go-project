@@ -1,0 +1,496 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight loss | Food2Go</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <script src="https://kit.fontawesome.com/c0294546ca.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'css/bodytype.css' %}">
+</head>
+<body1>
+    
+    <!-- header section starts -->
+    <header class="header">
+
+        <a href="/" class="logo"><i class="fas fa-shipping-fast"></i>Food2Go</a>
+
+        <!-- Change navbar -->
+        <nav class="navbar">
+            <a href="/">home</a>
+            <a href="ourmenu">our menu</a>
+            <a href="#features">Weight loss info</a>
+            <a href="#foods">foods</a>
+            <a href="#products">recommendations</a>
+            <a href="#popmeals">popular</a>
+            <a href="#review">reviews</a>
+            <a href="/chart">Weight tracker</a>
+        </nav>
+
+        <div class="icons">
+            <div class="fas fa-bars" id="menu-btn"></div>
+            <div class="fas fa-shopping-cart" id="cart-btn"></div>
+            <div class="fas fa-user" id="login-btn"></div>
+        </div>
+
+        <!-- Shopping basket section, if logged in you can add to basket and view + if your not logged in you cant view the basket -->
+        <div class="shopping-cart">
+            <form action="" class="login-form1">
+                {% if user.is_authenticated %}
+                {% if empty %}
+                  <h2 style="font-weight:bold; font-size:5rem;">Your shopping basket is empty.</h2>
+                  <p style="font-weight:bold">Lets add some meals to your basket</p>
+                  <a href="/ourmenu" class="btn">Our menu</a>
+                {% else %}
+                  <div class="nav-item">
+                    <a class = "nav-link" class="btn" href = "/basket" style="font-weight: bold; font-size: 16px; text-align: center; display: flex; justify-content: center; align-items: center;">Shopping basket</a>
+                  </div>
+                {% endif %}
+              {% else %}
+                <a class = "nav-link" class="btn" href = "/login" style="font-weight: bold; font-size: 16px; text-align: center; display: flex; justify-content: center; align-items: center;">Login to use basket</a>
+              {% endif %}
+            </form>
+        </div>
+
+        <!-- User icon - allows user to login. register and logout -->
+        <form action="" class="login-form">
+            <div class="nav-item">
+            {% if user.is_authenticated %}
+                <a class = "nav-link" class="btn" href = "/logout" style="font-weight: bold; font-size: 16px;">Logout</a>
+            {% else %}
+                <a class = "nav-link" class="btn" href = "/login" style="font-weight: bold; font-size: 16px;">Login</a>
+                <a class = "nav-link" class="btn" href = "/register" style="font-weight: bold; font-size: 16px;">Register</a>
+            {% endif %}
+            </div>
+        </form>
+
+    </header>
+    <!-- header section ends -->
+
+    <!-- home section starts  -->
+    <section class="home" id="home">
+
+        <div class="content">
+            <h3> Weight <span>Loss</span></h3>
+            <p><span style="font-weight:bold">Commit to the change</span></p>
+            <a href="/basket" class="btn">Your basket</a>
+        </div>
+
+    </section>
+    <!-- home section ends -->
+
+    <!-- weight loss information starts -->
+    <section class="features" id="features">
+
+        <h1 class="heading"> Weight loss <span>Information</span> </h1>
+
+        <div class="box-container">
+
+            <div class="box" style="background: #c9f5d9">
+                <img src="{% static 'img/weightloss1.png' %}" alt="What is weight loss?">
+                <button type="button" class="bodybtn1" onclick="openPopup()"><p><span style="font-weight:bold">What is weight loss?</span></p></button>
+                <div class="popup" id="popup">
+                    <h2>What is weight loss?</h2>
+                    <p>It is burning more calories than you take in. The reduction of total body weight.</p>
+                    <button type="button" class="btn" onclick="closePopup()">OK</button>
+                </div>
+            </div>
+
+            <div class="box" style="background: #c9f5d9">
+                <img src="{% static 'img/weightloss2.png' %}" alt="How to stay lean">
+                <button type="button" class="bodybtn1" onclick="openPopup1()"><p><span style="font-weight:bold">How to lose weight?</span></p></button>
+                <div class="popup1" id="popup1">
+                    <h2>How to lose weight?</h2>
+                    <ul style="list-style-type: none">
+                        <li>1. Consume fewer calories than your body burns.</li>
+                        <li>2. Eat a healthy diet.</li>
+                        <li>3. Increase physical activity.</li>
+                        <li>4. Stay hydrated.</li>
+                        <li>5. Get enough sleep.</li>
+                    </ul>
+                    <button type="button" class="btn" onclick="closePopup1()">OK</button>
+                </div>
+            </div>
+
+            <div class="box" style="background: #c9f5d9">
+                <img src="{% static 'img/weightloss3.png' %}" alt="Some Tips to stay lean">
+                <button type="button" class="bodybtn1" onclick="openPopup2()"><p><span style="font-weight:bold">Some tips for weight loss</span></p></button>
+                <div class="popup2" id="popup2">
+                    <h2>Some tips for weight loss</h2>
+                    <ul style="list-style-type: none">
+                        <li>1. Avoid sugary drinks and processed foods.</li>
+                        <li>2. Include physical activity into your daily routine.</li>
+                        <li>3. Control portion sizes.</li>
+                        <li>4. Avoid skipping meals.</li>
+                        <li>5. Get enough sleep.</li>
+                    </ul>
+                    <button type="button" class="btn" onclick="closePopup2()">OK</button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- weight loss information ends -->
+
+    <!-- Breakfast meal options starts-->
+    <section class="foods" id="foods">
+
+        <h1 class="heading"> our <span>Breakfast</span> </h1>
+
+        <div class="box-container">
+
+            <div class="box2" style="background: #c9f5d9">
+                <a href="/products/1"><img src="{% static 'img/oat-banana-pancakes-with-raspberries.png' %}" alt="Oat banana pancakes"></a>
+                <h3>Sweet Oat banana pancakes</h3>
+                <p>Made from rolled oats and bananas, these pancakes will get you out of bed</p>
+                <a href="/products/1" class="btn">read more</a>
+                <a href="addbasket/{{1}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box2" style="background: #c9f5d9">
+                <a href="/products/2"><img src="{% static 'img/kale.png' %}" alt="Tropical Green Kale Smoothie"></a>
+                <h3>Tropical green kale smoothie</h3>
+                <p>Grab breakfast on the go with this quick and easy tropical green smoothie.</p>
+                <a href="/products/2" class="btn">read more</a>
+                <a href="addbasket/{{2}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box2" style="background: #c9f5d9">
+                <a href="/products/3"><img src="{% static 'img/baked-egg-kale-and-herb-pots.png' %}" alt="Baked Egg, Kale And Herb Pots"></a>
+                <h3>Baked egg, kale and herb pots</h3>
+                <p>These egg pots have an extra veg boost to make them healthy and delicious.</p>
+                <a href="/products/3" class="btn">read more</a>
+                <a href="addbasket/{{3}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box2" style="background: #c9f5d9">
+                <a href="/products/4"><img src="{% static 'img/smashed-chickpea-bruschetta.png' %}" alt="Smashed Chickpea Bruschetta"></a>
+                <h3>Smashed chickpea bruschetta</h3>
+                <p>Start the day with an easy protein hit, with this tasty vegetarian breakfast starter.</p>
+                <a href="/products/4" class="btn">read more</a>
+                <a href="addbasket/{{4}}" class="btn">add to cart</a>
+            </div>
+            
+        </div>
+
+    </section>
+    <!-- Breakfast meal options ends-->
+
+    <!--Lunch meal options starts-->
+    <section class="foods" id="foods">
+
+        <h1 class="heading"> our <span>Lunch</span> </h1>
+
+        <div class="box-container">
+
+            <div class="box2" style="background: #c9f5d9">
+                <a href="/products/13"><img src="{% static 'img/lentil-veg-soup.png' %}" alt="A Little Light Lentil Soup"></a>
+                <h3>A Little Light Lentil soup</h3>
+                <p>It’s loaded with ingredients that are good to eat.</p>
+                <a href="/products/13" class="btn">read more</a>
+                <a href="addbasket/{{13}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box2" style="background: #c9f5d9">
+                <a href="/products/14"><img src="{% static 'img/chickpea-salad-sandwich.png' %}" alt="Chickpea Salad Sandwich"></a>
+                <h3>Chickpea Salad Sandwich</h3>
+                <p>A lunch option that's a plant-based powerhouse of a lunch.</p>
+                <a href="/products/14" class="btn">read more</a>
+                <a href="addbasket/{{14}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box2" style="background: #c9f5d9">
+                <a href="/products/15"><img src="{% static 'img/Egg_Roll_in_a_Bowl.png' %}" alt="An Egg Roll In A Big Bowl"></a>
+                <h3>An Eggcellent Egg Roll In A Big Bowl</h3>
+                <p>The delicious egg roll filling served in a big bowl.</p>
+                <a href="/products/15" class="btn">read more</a>
+                <a href="addbasket/{{15}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box2" style="background: #c9f5d9">
+                <a href="/products/16"><img src="{% static 'img/Tuna-Egg-Salad-Stuffed-Peppers.png' %}" alt="Tuna Egg Salad Stuffed Peppers"></a>
+                <h3>Tuna Egg Salad Stuffed Peppers</h3>
+                <p>A big lunch for big goals. Time to energize and continue the day.</p>
+                <a href="/products/16" class="btn">read more</a>
+                <a href="addbasket/{{16}}" class="btn">add to cart</a>
+            </div>
+            
+        </div>
+
+    </section>
+    <!--Lunch meal options ends-->
+
+    <!--Dinner meal options starts-->
+    <section class="foods" id="foods">
+
+        <h1 class="heading"> our <span>Dinner</span> </h1>
+
+        <div class="box-container">
+
+            <div class="box2" style="background: #c9f5d9">
+                <a href="/products/25"><img src="{% static 'img/spanish-chicken-beans.png' %}" alt="Spanish Chicken And Beans"></a>
+                <h3>Spanish chicken & beans</h3>
+                <p>A flavourful, nutritional, delicious, low-cal one-pan chicken and beans dish.</p>
+                <a href="/products/25" class="btn">read more</a>
+                <a href="addbasket/{{25}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box2" style="background: #c9f5d9">
+                <a href="/products/26"><img src="{% static 'img/braised-lentils-with-cumin-spiced-chicken.png' %}" alt="Braised Lentils With Chicken"></a>
+                <h3>Braised lentils with chicken</h3>
+                <p>Lentils and fragrant chicken combine for a high with protein, low in fat free meal.</p>
+                <a href="/products/26" class="btn">read more</a>
+                <a href="addbasket/{{26}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box2" style="background: #c9f5d9">
+                <a href="/products/27"><img src="{% static 'img/piri-piri-fish-with-charred-corn-salad.png' %}" alt="Piri Piri Fish With Corn Salad"></a>
+                <h3>Piri piri fish with corn salad</h3>
+                <p>An Ideal Plant-Based Lunch Option. It’s Loaded With Ingredients That Are Good To Eat.</p>
+                <a href="/products/27" class="btn">read more</a>
+                <a href="addbasket/{{27}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box2" style="background: #c9f5d9">
+                <a href="/products/28"><img src="{% static 'img/broccoli-and-noodle-salad-with-sesame-dressing.png' %}" alt="Salad With Sesame Dressing"></a>
+                <h3>Salad with sesame dressing</h3>
+                <p>With soba noodles, broccoli, edamame and pomegranates. A colourful veg bowl.</p>
+                <a href="products/28" class="btn">read more</a>
+                <a href="addbasket/{{28}}" class="btn">add to cart</a>
+            </div>
+
+        </div>
+
+    </section>
+    <!--Dinner meal options ends-->
+    
+    <!-- Food recommendations starts-->
+    <section class="foods" id="foods" style="margin-top: 50px;">
+
+        <h1 class="heading"> our <span>Recommmendations</span> </h1>
+            
+        <div class="box-container">
+            {% for p in recommendations %}
+            <div class="box">
+                <a href="/products/{{p.id}}"><img src="{{p.image.url}}" alt="{{p.name}}"></a>
+                <h3>{{p.name}}</h3>
+                <div class="stars"></div>
+                    <a href="/products/{{p.id}}" class="btn">read more</a>
+                  <a href="/addbasket/{{p.id}}" class="btn">add to cart</a>
+            </div>
+            {% endfor %}
+            
+         </div>
+            
+    </section>
+    <!-- Food recommendations ends-->
+        
+    <!-- Javascript that produces the starts for the recommneded products starts -->
+    <script>
+        function generateStars() {
+            const fullStars = Math.floor(Math.random() * 2) + 3; // Generates a random number between 3 and 4
+            const hasHalfStar = Math.random() < 0.5; // 50% chance of having a half star
+                
+            const containers = document.querySelectorAll('.stars');
+                    
+            for (let i = 0; i < containers.length; i++) { // function then iterates over each container using a for loop.
+                const container = containers[i];
+                container.innerHTML = ''; // Clear any existing stars
+                        
+                for (let j = 0; j < fullStars; j++) { //  adds a number of full stars to the container using another for loop, based on the random number generated earlier.
+                    const star = document.createElement('i');
+                    star.classList.add('fas', 'fa-star');
+                    container.appendChild(star);
+                }
+                        
+                if (hasHalfStar) {
+                    const halfStar = document.createElement('i');
+                    halfStar.classList.add('fas', 'fa-star-half-alt');
+                    container.appendChild(halfStar);
+                }
+            }
+        }
+                
+        window.addEventListener('load', generateStars); // used to run the generateStars() function when the page finishes loading.
+    </script>
+    <!-- Javascript that produces the starts for the recommneded products ends -->
+
+    <!-- Most popular meals starts -->
+    <section class="popmeals" id="popmeals">
+
+        <h1 class="heading"> Most Popular <span>Meals</span> </h1>
+
+        <div class="popmealscontainer" style="background: #c9f5d9">
+
+            <div class="popmealsbox">
+                <div class="popimg">
+                    <a href="/products/4"><img src="{% static 'img/smashed-chickpea-bruschetta.png' %}" alt="Smashed Chickpea Bruschetta"></a>
+                </div>
+                <h3>Smashed Chickpea Bruschetta</h3>
+                <h2>€5.00</h2>
+            </div>
+
+            <div class="popmealsbox">
+                <div class="popimg">
+                    <a href="/products/2"><img src="{% static 'img/kale.png' %}" alt="Tropical Green Kale Smoothie"></a>
+                </div>
+                <h3>Tropical Green Kale Smoothie</h3>
+                <h2>€5.00</h2>
+            </div>
+
+            <div class="popmealsbox">
+                <div class="popimg">
+                    <a href="/products/28"><img src="{% static 'img/broccoli-and-noodle-salad-with-sesame-dressing.png' %}" alt="Salad With Sesame Dressing"></a>
+                </div>
+                <h3>Salad With Sesame Dressing</h3>
+                <h2>€5.00</h2>
+            </div>
+
+            <div class="popmealsbox">
+                <div class="popimg">
+                    <a href="/products/16"><img src="{% static 'img/Tuna-Egg-Salad-Stuffed-Peppers.png' %}" alt="Tuna Egg Salad Stuffed Peppers"></a>
+                </div>
+                <h3>Tuna Egg Salad Stuffed Peppers</h3>
+                <h2>€5.00</h2>
+            </div>
+            
+        </div>
+
+    </section>
+    <!-- Most popular meals ends -->
+
+    <!-- Customer reviews starts-->
+    <section class="review" id="review">
+        
+        <h1 class="heading"> customer <span>reviews</span> </h1>
+        
+        <div class="swiper review-slider">
+            
+            <div class="swiper-wrapper">
+                
+                <div class="swiper-slide box">
+                    <img src="{% static 'img/loss1.png' %}" alt="Picture of Jen">
+                    <p>Genuinely loved the meals eg. Spanish Chicken & Beans, I ordered and it has helped me on my weight loss journey.</p>
+                    <h3>Jen Oviedo</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'img/loss2.png' %}" alt="Picture of Rory">
+                    <p>The weight loss information is a good help on getting started and it has been a great help for me.</p>
+                    <h3>Rory Castello</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'img/loss3.png' %}" alt="Picture of Ismael">
+                    <p>I have struggled over time with weight lose but the information and the meals have helped me to reduce my weight..</p>
+                    <h3>Ismael Andre</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'img/loss4.png' %}" alt="Picture of David">
+                    <p>This site is amazing and helpful I love the food and service. Highly recommended them to anyone who is looking for meals prepared.</p>
+                    <h3>David Jermaine</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-- Customer reviews ends -->
+
+    <!-- footer section starts -->
+    <section class="footer">
+
+        <div class="box-container">
+
+            <div class="box">
+                <h3> <i class="fas fa-shipping-fast"></i> Food2Go </h3>
+                <p>“It Is Health That Is Real Wealth And Not Pieces Of Gold And Silver.” – Mahatma Gandhi.</p>
+                <div class="share">
+                    <a href="https://www.facebook.com/" class="fab fa-facebook-f"></a>
+                    <a href="https://twitter.com/" class="fab fa-twitter"></a>
+                    <a href="https://www.instagram.com/" class="fab fa-instagram"></a>
+                    <a href="https://ie.linkedin.com/" class="fab fa-linkedin"></a>
+                </div>
+            </div>
+
+            <div class="box">
+                <h3>contact info</h3>
+                <a href="#" onclick="return false;" class="links"> <i class="fas fa-phone"></i> +123-456-7890 </a>
+                <a href="#" onclick="return false;" class="links"> <i class="fas fa-phone"></i> +111-222-3333 </a>
+                <a href="https://mail.google.com/mail/u/0/#inbox" class="links"> <i class="fas fa-envelope"></i> colin.ekedigwe2@mail.dcu.ie </a>
+                <a href="https://mail.google.com/mail/u/0/#inbox" class="links"> <i class="fas fa-envelope"></i> gideon.amaechi2@mail.dcu.ie </a>
+                <a href="https://www.google.com/maps/place/North+City,+Dublin+1,+D01+P767/@53.3503011,-6.2562243,15z/data=!3m1!4b1!4m5!3m4!1s0x48670e85f02ee71d:0x9f56abb85cd807b7!8m2!3d53.3503017!4d-6.2562243" class="links"> <i class="fas fa-map-marker-alt"></i> dublin, ireland - D01P767 </a>
+            </div>
+
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="/" class="links"> <i class="fas fa-arrow-right"></i> home </a>
+                <a href="ourmenu" class="links"> <i class="fas fa-arrow-right"></i> our menu </a>
+                <a href="#features" class="links"> <i class="fas fa-arrow-right"></i> Weight loss info </a>
+                <a href="#foods" class="links"> <i class="fas fa-arrow-right"></i> foods </a>
+                <a href="#products" class="links"> <i class="fas fa-arrow-right"></i> recommendations </a>
+                <a href="#popmeals" class="links"> <i class="fas fa-arrow-right"></i> popular </a>
+                <a href="#review" class="links"> <i class="fas fa-arrow-right"></i> review </a>
+                <a href="chart" class="links"> <i class="fas fa-arrow-right"></i> Weight tracker</a>
+            </div>
+
+            <div class="box">
+                <h3>payments</h3>
+                <img src="{% static 'img/payment.png' %}" class="payment-img" alt="Payment">
+            </div>
+
+        </div>
+
+        <div class="credit"> created by <span> Colin Ekedigwe & Gideon Amaechi </span> | 20403046 & 20364806 </div>
+
+    </section>
+    <!-- footer section ends -->
+
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+    <!-- custom js file link  -->
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/bodytype.js' %}"></script>
+
+    <!-- Arrow that leads you back =to the top of the page -->
+    <a class="gotopbtn" href="#"> <i class="fas fa-arrow-up"></i> </a>
+
+</body1>
+</html>

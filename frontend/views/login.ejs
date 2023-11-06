@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+        <link rel="stylesheet" href="/stylesheets/login.css"/>
+		<title>Login Page</title>
+    </head>
+        <div class="center">
+            <h1>Login</h1>
+            <form id="login-form">
+                <div class="txt_field">
+                    <input type="text" name="username-input" id="username"required>
+                    <span></span>
+                    <label for="username-input">Username</label>
+                </div>
+                <div class="txt_field">
+                    <input type="password" name="password-input" id="password" required>
+                    <span></span>
+                    <label for="password-input">Password</label>
+                </div>
+                <button type="submit">Login</button>
+                <div class="reg_link">
+                    Not a member? <a href="/register">Register</a>
+                </div>
+            </form>
+        </div>
+		<script>
+				// your script goes here
+                function formValidator(event){
+                event.preventDefault(); // always prevent default events when using javascript
+                // get the value the in the username box 
+                let username = document.getElementById("username").value; 
+                // get the value in the password box
+                let password = document.getElementById("password").value;
+                if( username == ""){
+                    alert("Username cannot be null");
+                }
+                else if (password == ""){
+                    alert("Password cannot be null");
+                }
+                else{
+                    alert("form is valid");
+                    fetch("http://127.0.0.1:8000/api/token/", {
+                    method: 'POST',
+                    headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({username: username, password: password})
+                }).then(response=>response.json())
+                  .then(data=>{
+                    console.log(data); // still log it so we can debug
+                    if('access' in data){
+                        // successful login
+                        let accessToken = data['access'];
+                        let refreshToken = data['refresh'];
+                        localStorage.setItem("access", accessToken);
+                        localStorage.setItem("refresh", refreshToken);
+                        window.location.href = "/"; // the "/" is the homepage for node http://127.0.0.1:3000
+                    }
+                    else{
+                        alert("username or password invalid");
+                    }
+                });
+            }
+        }
+
+        let myform = document.getElementById("login-form"); // get the form 
+        myform.addEventListener('submit', formValidator); // bind the validator function to the submit button for the form
+
+        let req = "http://127.0.0.1:8000/api/products/"
+        fetch(req)
+        .then((response) => response.json())
+        .then(data => console.log(data));
+					
+        </script>
+</html>

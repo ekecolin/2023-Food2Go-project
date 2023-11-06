@@ -1,0 +1,290 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator | Food2Go</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- font awesome cdn link  -->
+    <script src="https://kit.fontawesome.com/c0294546ca.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bmi.css' %}">
+</head>
+<body>
+    
+    <!-- header section starts -->
+    <header class="header">
+        
+        <a href="/" class="logo" style="text-decoration: none;"><i class="fas fa-shipping-fast"></i>Food2Go</a>
+
+        <nav class="navbar">
+            <a style="text-decoration: none;" href="/">home</a>
+            <a style="text-decoration: none;" href="ourmenu">our menu</a>
+            <a style="text-decoration: none;" href="#bodytypes">categories</a>
+            <a style="text-decoration: none;" href="previous_orders">your orders</a>
+        </nav>
+
+        <div class="icons">
+            <div class="fas fa-bars" id="menu-btn"></div>
+            <div class="fas fa-shopping-cart" id="cart-btn"></div>
+            <div class="fas fa-user" id="login-btn"></div>
+        </div>
+
+         <!-- Shopping basket section, if logged in you can add to basket and view + if your not logged in you cant view the basket -->
+         <div class="shopping-cart">
+            <form action="" class="login-form1">
+                {% if user.is_authenticated %}
+                {% if empty %}
+                  <h2 style="font-weight:bold; font-size:5rem;">Your shopping basket is empty.</h2>
+                  <p style="font-weight:bold">Lets add some meals to your basket</p>
+                  <a href="/ourmenu" class="btn">Our menu</a>
+                {% else %}
+                  <div class="nav-item">
+                    <a class = "nav-link" class="btn" href = "/basket" style="font-weight: bold; font-size: 16px; text-align: center; display: flex; justify-content: center; align-items: center;">Shopping basket</a>
+                  </div>
+                {% endif %}
+              {% else %}
+                <a class = "nav-link" class="btn" href = "/login" style="font-weight: bold; font-size: 16px; text-align: center; display: flex; justify-content: center; align-items: center;">Login to use basket</a>
+              {% endif %}
+            </form>
+        </div>
+
+        <!-- User icon - allows user to login. register and logout -->
+        <form action="" class="login-form">
+            <div class="nav-item">
+                {% if user.is_authenticated %}
+                <a class = "nav-link" class="btn" href = "/logout" style="font-weight: bold; font-size: 16px;">Logout</a>
+                {% else %}
+                <a class = "nav-link" class="btn" href = "/login" style="font-weight: bold; font-size: 16px;">Login</a>
+                <a class = "nav-link" class="btn" href = "/register" style="font-weight: bold; font-size: 16px;">Register</a>
+                {% endif %}
+            </div>
+        </form>
+
+    </header>
+    <!-- header section ends -->
+    
+    <!-- BMI calculator -->
+    <section class="bmi" id="bmi">
+        
+        <div class="container">
+            
+            <div class="box">
+                <h1>BMI Calculator</h1>
+                <div class="content">
+
+                <!--Created age input-->
+                <div class="input">
+                    <label for="height">Age</label>
+                    <input type="text" class="text-input" id="age" autocomplete="off" required/>
+                </div>
+
+                <!--Check mark for male or female-->
+                <div class="gender">
+
+                    <label class="container">
+                        <input type="radio" name="radio" id="m"><p class="text">Male</p>
+                        <span class="checkmark"></span>
+                      </label>
+
+                    <label class="container">
+                        <input type="radio" name="radio" id="f" ><p class="text">Female</p>
+                        <span class="checkmark"></span>
+                    </label>
+
+                </div>
+
+                <!--Settings for the height and weight-->
+                <div class="containerHW">
+                    <div class="inputH">
+                        <label for="height">Height(cm)</label>
+                        <input type="number" id="height" required>
+                    </div>
+                
+                    <div class="inputW">
+                        <label for="weight">Weight(kg)</label>
+                        <input type="number" id="weight" required>
+                    </div>
+                </div>
+
+              <!--Calculation button this calculates the information entered in by the user-->
+              <button class="calculate" id="submit" onclick="calculate();">Calculate BMI</button>
+              </div>
+              <!--This shows the result and also gives a comment on the users weight-->
+              <div class="result">
+                <p>Your BMI is</p>
+                <div id="result">00.00</div>
+                <p class="comment"></p>
+              </div>
+            </div>
+        </div>
+
+        <!-- The Modal - Pop up window if a user doesnt fill in all details -->
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modalText"></p>
+          </div>
+        </div>
+
+    </section>
+    <!-- BMI calculator ends -->
+
+    <!-- Calorie calculator along with its CSS and its graph starts -->
+    <section class="calories" style="width:95%;; margin-top:100px; background-color: #fafafa; border-radius: 12px; padding: 0px; margin: 30px auto; padding:2rem 9%;">
+        <div class="calories-cal">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="left-data" style="background-color: #adefd1ff; text-align: center; border-radius: 12px; height: 100%;">
+                            <h1 style="color: #00203fff; font-weight: bold; font-size: 36px; padding: 30px 0;">Calories Calculator</h1>
+                            <div class="gender">
+                                
+                                <!-- Male or female gender picker -->
+                                <label class="container">
+                                    <input type="radio" name="gender" id="m" value="m"><p class="text">Male</p>
+                                    <span class="checkmark"></span>
+                                  </label>
+            
+                                <label class="container">
+                                    <input type="radio" name="gender" id="f" value="f"><p class="text">Female</p>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+
+                            <!-- Activity level picker -->
+                            <label for="activity-level" style="font-weight: bold; font-size: 16px;">Activity Level</label>
+                                <select id="activity-level" name="activity-level" style="display: flex; margin: 0 auto; background: #fff; box-shadow: 0px 0px 30px -30px rgba(0, 0, 0, 0.15); border-radius: 12px; font-size: 15px; padding: 20px 0; width: 54%; margin-bottom: 10px; text-align: center; cursor: pointer;">
+                                    <option value="1.2">Sedentary (little or no exercise)</option>
+                                    <option value="1.375">Lightly active (light exercise or sports 1-3 days a week)</option>
+                                    <option value="1.55">Moderately active (moderate exercise or sports 3-5 days a week)</option>
+                                    <option value="1.725">Very active (hard exercise or sports 6-7 days a week)</option>
+                                    <option value="1.9">Extra active (very hard exercise or sports and physical job or training twice a day)</option>
+                                </select>
+
+                            <h5>Age</h5>
+                            <input type="text" id="age">
+
+                            <h5>Height(cm)</h5>
+                            <input type="text" id="hi">
+
+                            <h5>Weight(Kg)</h5>
+                            <input type="text" id="we">
+
+                            <p id="resultcal" style="color: #00203fff; font-weight: bold; font-size: 18px; padding-top: 0.5rem"></p>
+
+                            <button class="btn btn-primary" style="cursor: pointer; color: #fff; background: #7cb896; font-size: 16px; border-radius: 7px; padding: 12px 0; width: 25%; outline: none; border: none; transition: all 0.5s;" onclick="Calo()">Calculate</button>
+                            <button class="btn btn-primaryr" style="cursor: pointer; color: #fff; background: #7cb896; font-size: 16px; border-radius: 7px; padding: 12px 0; width: 25%; outline: none; border: none; transition: all 0.5s;" onclick="Clear()">Clear</button>
+                            <p style="font-size: 15px; font-weight: bold">Please Enter your age, height and weight</p>
+                    </div>
+                </div>
+
+                    <!-- Pie chart settings -->
+                    <div class="col-md-6">
+                        <div class="pie-chart" style="height: 100%; border-bottom-right-radius: 30px; text-align: center">
+                            <h1 style="color: #00203fff; font-weight: bold; font-size: 36px; padding: 30px 0;">Pie Chart</h1>
+                            <canvas id="myChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+    <!-- Calorie calculator along with its CSS and its graph ends -->
+
+    <!-- Bodytype section starts -->
+    <section class="bodytypes" id="bodytypes">
+        
+        <h1 class="heading" style="font-weight: bold; font-size: 40px;"> Select your <span>body type</span> </h1>
+        
+        <div class="box-container">
+
+            <div class="box">
+                <a href="weightloss"><img src="{% static 'img/losswoman.png' %}"></a>
+                <h3 style="font-weight: bold;">Weight loss</h3>
+                <p>Select this category if your result was <span style="font-weight:bold"> any more than overweight </span></p>
+                <a href="weightloss" class="btn">Lets begin</a>
+            </div>
+
+            <div class="box1">
+                <a href="staylean"><img src="{% static 'img/leancouple.png' %}"></a>
+                <h3 style="font-weight: bold;">stay lean</h3>
+                <p>Select this category if your result was <span style="font-weight:bold"> healthy </span></p>
+                <a href="staylean" class="btn">Lets begin</a>
+            </div>
+
+            <div class="box2">
+                <a href="bulk"><img src="{% static 'img/musclegain.png' %}"></a>
+                <h3 style="font-weight: bold;">bulk up</h3>
+                <p>Select this category if your result was <span style="font-weight:bold"> Underweight </span></p>
+                <a href="bulk" class="btn">Lets begin</a>
+            </div>
+
+        </div>
+
+    </section>
+    <!-- Bodytype section ends -->
+
+    <!-- Footer section starts -->
+    <section class="footer">
+
+        <div class="box-container">
+
+            <div class="box">
+                <h3 style="font-weight: bold;"> <i class="fas fa-shipping-fast"></i> Food2Go </h3>
+                <p>“It Is Health That Is Real Wealth And Not Pieces Of Gold And Silver.” – Mahatma Gandhi.</p>
+                <div class="share">
+                    <a style="text-decoration: none;" href="https://www.facebook.com/" class="fab fa-facebook-f"></a>
+                    <a style="text-decoration: none;" href="https://twitter.com/" class="fab fa-twitter"></a>
+                    <a style="text-decoration: none;" href="https://www.instagram.com/" class="fab fa-instagram"></a>
+                    <a style="text-decoration: none;" href="https://ie.linkedin.com/" class="fab fa-linkedin"></a>
+                </div>
+            </div>
+
+            <div class="box">
+                <h3 style="font-weight: bold;">contact info</h3>
+                <a style="text-decoration: none;" href="#" onclick="return false;" class="links"> <i class="fas fa-phone"></i> +123-456-7890 </a>
+                <a style="text-decoration: none;" href="#" onclick="return false;" class="links"> <i class="fas fa-phone"></i> +111-222-3333 </a>
+                <a style="text-decoration: none;" href="https://mail.google.com/mail/u/0/#inbox" class="links"> <i class="fas fa-envelope"></i> colin.ekedigwe2@mail.dcu.ie </a>
+                <a style="text-decoration: none;" href="https://mail.google.com/mail/u/0/#inbox" class="links"> <i class="fas fa-envelope"></i> gideon.amaechi2@mail.dcu.ie </a>
+                <a style="text-decoration: none;" href="https://www.google.com/maps/place/North+City,+Dublin+1,+D01+P767/@53.3503011,-6.2562243,15z/data=!3m1!4b1!4m5!3m4!1s0x48670e85f02ee71d:0x9f56abb85cd807b7!8m2!3d53.3503017!4d-6.2562243" class="links"> <i class="fas fa-map-marker-alt"></i> dublin, ireland - D01P767 </a>
+            </div>
+
+            <div class="box">
+                <h3 style="font-weight: bold;">quick links</h3>
+                <a style="text-decoration: none;" href="/" class="links"> <i class="fas fa-arrow-right"></i> home </a>
+                <a style="text-decoration: none;" href="ourmenu" class="links"> <i class="fas fa-arrow-right"></i> our menu </a>
+                <a style="text-decoration: none;" href="#bodytypes" class="links"> <i class="fas fa-arrow-right"></i> categories </a>
+                <a style="text-decoration: none;" href="previous_orders" class="links"> <i class="fas fa-arrow-right"></i> your orders </a>
+            </div>
+
+            <div class="box">
+                <h3 style="font-weight: bold;">payments</h3>
+                <img src="{% static 'img/payment.png' %}" class="payment-img" alt="Payment">
+            </div>
+
+        </div>
+
+        <div class="credit"> created by <span> Colin Ekedigwe & Gideon Amaechi </span> | 20403046 & 20364806 </div>
+
+    </section>
+    <!-- Footer section ends -->
+    
+    <!-- custom js file link  bmi controls the whole webpage + the bmi calculator and bmi2 is for the calorie calculator specifically + script.js is used for the navbar -->
+    <script src="{% static 'js/bmi.js' %}"></script>
+    <script src="{% static 'js/bmi2.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,190 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight Graph Tracker | Food2Go</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <script src="https://kit.fontawesome.com/c0294546ca.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'css/bodytype.css' %}">
+    <style>
+      #myChart{
+        margin: 0 auto;
+        width:75%;
+        max-height:150px;
+      }
+    </style>
+</head>
+<body>
+  
+  <!-- header section starts -->
+  <header class="header">
+        
+    <a href="/" class="logo"><i class="fas fa-shipping-fast"></i>Food2Go</a>
+
+    <nav class="navbar">
+        <a href="/">home</a>
+        <a href="ourmenu">our menu</a>
+        <a href="bmi">BMI calculator</a>
+        <a href="weightloss">weight loss</a>
+        <a href="staylean">stay lean</a>
+        <a href="bulk">bulk</a>
+        <a href="previous_orders">your orders </a>
+    </nav>
+
+    <div class="icons">
+        <div class="fas fa-bars" id="menu-btn"></div>
+        <div class="fas fa-shopping-cart" id="cart-btn"></div>
+        <div class="fas fa-user" id="login-btn"></div>
+    </div>
+
+    <!-- Shopping basket section, if logged in you can add to basket and view + if your not logged in you cant view the basket -->
+    <div class="shopping-cart">
+        <form action="" class="login-form1">
+            {% if user.is_authenticated %}
+            {% if empty %}
+            <h2 style="font-weight:bold; font-size:5rem;">Your shopping basket is empty.</h2>
+            <p style="font-weight:bold">Lets add some meals to your basket</p>
+            <a href="/ourmenu" class="btn">Our menu</a>
+            {% else %}
+            <div class="nav-item">
+              <a class = "nav-link" class="btn" href = "/basket" style="font-weight: bold; font-size: 16px; text-align: center; display: flex; justify-content: center; align-items: center;">Shopping basket</a>
+            </div>
+            {% endif %}
+            {% else %}
+            <a class = "nav-link" class="btn" href = "/login" style="font-weight: bold; font-size: 16px; text-align: center; display: flex; justify-content: center; align-items: center;">Login to use basket</a>
+            {% endif %}
+        </form>
+    </div>
+
+    <!-- User icon - allows user to login. register and logout -->
+    <form action="" class="login-form">
+        <div class="nav-item">
+          {% if user.is_authenticated %}
+          <a class = "nav-link" class="btn" href = "/logout" style="font-weight: bold; font-size: 16px;">Logout</a>
+          {% else %}
+          <a class = "nav-link" class="btn" href = "/login" style="font-weight: bold; font-size: 16px;">Login</a>
+          <a class = "nav-link" class="btn" href = "/register" style="font-weight: bold; font-size: 16px;">Register</a>
+          {% endif %}
+        </div>
+    </form>
+
+    </header>
+    <!-- header section ends -->
+
+    <!-- home section starts  -->
+    <section class="home" id="home">
+
+        <div class="content">
+            <h3>Weight <span>graph</span> </h3>
+            <p>You can monitor your weight journey using our tracker</p>
+            <a href="ourmenu" class="btn">Our Menu</a>
+        </div>
+
+    </section>
+    <!-- home section ends -->
+    
+    <!-- Chart section starts -->
+    <div>
+      <canvas id="myChart"></canvas>
+      <form action="" method="POST" style="text-align: center; display: block;">
+        {% csrf_token %}
+        {{ form.as_table }}
+        <button type="submit" class="btn" style="text-align: center; font-size:1rem">Log new weight</button> <a href="{% url 'reset_weight' %}" class="btn" style="font-size:1rem">Start tracking</a> <a href="{% url 'reset_weight' %}" class="btn" style="font-size:1rem">Reset weight tracking</a>
+      </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        const ctx = document.getElementById('myChart');
+        const numEntries = {{ weight_labels|length }};
+        let labels = [];
+        for (let i = 1; i <= numEntries; i++) {
+          labels.push(`Week ${i}`); // takes in a list of dates and returns a list of week numbers.
+        }
+
+        // https://www.chartjs.org/docs/latest/charts/line.html 
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Your Weight',
+                    data: {{weight_loss|safe}},  
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }]
+            },
+        
+        });
+      </script>
+      <!-- Chart section ends -->
+    
+    <!-- footer section starts  -->
+    <section class="footer" style="margin-top: 100px">
+
+      <div class="box-container">
+
+          <div class="box">
+              <h3> <i class="fas fa-shipping-fast"></i> Food2Go </h3>
+              <p>“It Is Health That Is Real Wealth And Not Pieces Of Gold And Silver.” – Mahatma Gandhi.</p>
+              <div class="share">
+                  <a href="https://www.facebook.com/" class="fab fa-facebook-f"></a>
+                  <a href="https://twitter.com/" class="fab fa-twitter"></a>
+                  <a href="https://www.instagram.com/" class="fab fa-instagram"></a>
+                  <a href="https://ie.linkedin.com/" class="fab fa-linkedin"></a>
+              </div>
+          </div>
+
+          <div class="box">
+              <h3>contact info</h3>
+              <a href="#" onclick="return false;" class="links"> <i class="fas fa-phone"></i> +123-456-7890 </a>
+              <a href="#" onclick="return false;" class="links"> <i class="fas fa-phone"></i> +111-222-3333 </a>
+              <a href="https://mail.google.com/mail/u/0/#inbox" class="links"> <i class="fas fa-envelope"></i> colin.ekedigwe2@mail.dcu.ie </a>
+              <a href="https://mail.google.com/mail/u/0/#inbox" class="links"> <i class="fas fa-envelope"></i> gideon.amaechi2@mail.dcu.ie </a>
+              <a href="https://www.google.com/maps/place/North+City,+Dublin+1,+D01+P767/@53.3503011,-6.2562243,15z/data=!3m1!4b1!4m5!3m4!1s0x48670e85f02ee71d:0x9f56abb85cd807b7!8m2!3d53.3503017!4d-6.2562243" class="links"> <i class="fas fa-map-marker-alt"></i> dublin, ireland - D01P767 </a>
+          </div>
+
+          <div class="box">
+              <h3>quick links</h3>
+              <a href="/" class="links"> <i class="fas fa-arrow-right"></i> home </a>
+              <a href="ourmenu.html" class="links"> <i class="fas fa-arrow-right"></i> our menu </a>
+              <a href="bmi" class="links"> <i class="fas fa-arrow-right"></i> BMI calculator </a>
+              <a href="weightloss" class="links"> <i class="fas fa-arrow-right"></i> weightloss </a>
+              <a href="staylean" class="links"> <i class="fas fa-arrow-right"></i> stay lean </a>
+              <a href="bulk" class="links"> <i class="fas fa-arrow-right"></i> bulk </a>
+              <a href="previous_orders" class="links"> <i class="fas fa-arrow-right"></i> your orders </a>
+          </div>
+
+          <div class="box">
+              <h3>payments</h3>
+              <img src="{% static 'img/payment.png' %}" class="payment-img" alt="Payment">
+          </div>
+
+      </div>
+
+      <div class="credit"> created by <span> Colin Ekedigwe & Gideon Amaechi </span> | 20403046 & 20364806 </div>
+  
+  </section>
+  <!-- footer section ends -->
+  
+  <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+  <!-- custom js file link  -->
+  <script src="{% static 'js/script.js' %}"></script>
+
+  <!-- Arrow that leads you back =to the top of the page -->
+  <a class="gotopbtn" href="#"> <i class="fas fa-arrow-up"></i></a>
+
+</body>
+</html>

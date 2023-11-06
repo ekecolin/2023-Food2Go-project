@@ -1,0 +1,536 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    outline: none; border:none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: all .2s linear;
+}
+    
+body{
+    margin-top: 15vh;
+    align-items: center;
+    justify-content: center;
+    min-height: 130vh;
+    background: #adefd1ff;
+}
+
+section{
+    padding:2rem 9%;
+}
+
+/* Makes BMI calculator to be centered on the page */
+.container .box{
+    margin: 0 auto;
+}
+
+.bmi .box {
+    width: 500px;
+    background: #fafafa;
+    border-radius: 12px;
+    text-align: center
+}
+
+.bmi h1 {
+    color: #00203fff;
+    font-weight: bold;
+    font-size: 36px;
+    padding: 30px 0;
+}
+
+.bmi .content {
+    padding: 0 30px;    
+}
+
+/*BMI Calculator title*/
+.bmi .input {
+    background: #fff;
+    box-shadow: 0px 0px 30px -30px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    padding: 10px 0;
+    margin-bottom: 10px;
+}
+
+/*BMI Calculator age + input from user settings*/
+.bmi .input label {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    color: #00203fff;
+    margin-bottom: 10px;
+}
+.bmi .input input {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #4e691a;
+    width: 50%;
+    text-align: center;
+    font-size: 25px;
+}
+
+/*BMI Calculator gender + check settings*/
+.bmi .gender {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    background: #fff;
+    box-shadow: 0px 0px 30px -30px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    padding: 20px 0;
+    margin-bottom: 10px;
+}
+
+/* Style for Radio - button settings */
+.bmi .gender .container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-top: 7px;
+    cursor: pointer;
+    font-size: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+  
+/* Hide the browser's default radio button */
+.bmi .gender .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+/* Create a custom radio button - select button for male or female */
+.bmi .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    margin-left: 40px;
+    margin-top: 2px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+  
+/* On mouse-over, add a grey background color */
+.bmi .gender .container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+  
+/* When the radio button is checked, add a blue background */
+.bmi .gender .container input:checked ~ .checkmark {
+    background-color: #4e691a;
+}
+  
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.bmi .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+/* Show the indicator (dot/circle) when checked */
+.bmi .gender .container input:checked ~ .checkmark:after {
+    display: block;
+}
+  
+/* Style the indicator (dot/circle) */
+.bmi .gender .container .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+/* Container for the male and female checking section*/
+.bmi .containerHW {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* BMI calculator weight settings */
+.bmi .inputW {
+    background: #fff;
+    box-shadow: 0px 0px 30px -30px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    padding: 10px 0;
+    margin-bottom: 10px;
+}
+
+.bmi .inputW label {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    color: #00203fff;
+    margin-bottom: 10px;
+}
+.bmi .inputW input {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #4e691a;
+    width: 50%;
+    text-align: center;
+    font-size: 25px;
+}
+
+/* BMI calculator height settings */
+.bmi .inputH {
+    background: #fff;
+    box-shadow: 0px 0px 30px -30px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.bmi .inputH label {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    color: #00203fff;
+    margin-bottom: 10px;
+}
+.bmi .inputH input {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #4e691a;
+    width: 50%;
+    text-align: center;
+    font-size: 25px;
+}
+
+/* BMI calculate button settings */
+.bmi button.calculate {
+    cursor: pointer;
+    color: #fff;
+    background: #7cb896;
+    font-size: 16px;
+    border-radius: 7px;
+    padding: 12px 0;
+    width: 100%;
+    outline: none;
+    border: none;
+    transition: all 0.5s;
+}
+.bmi button.calculate:hover {
+    background: #4e691a;
+}
+  
+/* BMI calculator result + the comment of the result settings */
+.bmi .result {
+    padding: 10px 20px;
+}
+
+.bmi .result p {
+    font-weight: 600;
+    font-size: 20px;
+    color: #00203fff;
+    margin-bottom: 15px;
+}
+.bmi .result #result {
+    font-size: 36px;
+    font-weight: 900;
+    color: #00203fff;
+    background-color: #eaeaea;
+    display: inline-block;
+    padding: 7px 20px;
+    border-radius: 55px;
+    margin-bottom: 15px;
+}
+.bmi #comment {
+    color: #4e691a;
+    font-weight: 800;
+}
+
+.bmi .comment {
+    display: none;
+    border: solid #4e691a 1px;
+    border-radius: 7px;
+    padding: 5px;
+}
+
+/* The Modal (background) */
+.bmi .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 300px;
+  
+  }
+  
+/* Modal Content Pop up window if a user doesnt fill in all details */
+.bmi .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 600px;
+    border-radius: 10px;
+}
+  
+.bmi #modalText {
+    padding-top: 8px;
+    padding-right: 5px;
+    font-size: 18px;
+    color: #00203fff;
+}
+  
+.bmi .modal-wrong {
+    border: 2px solid red;
+}
+  
+.bmi .modal-correct {
+    border: 2px solid #4e691a;
+}
+  
+/* The Close Button for pop up window */
+.bmi .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+  
+.bmi .close:hover {
+    color: #4e691a; 
+}
+
+/*BMI Calories Calculator + check settings*/
+.calories .calories-cal .container .row .col-md-6 .left-data .gender {
+    display: flex;
+    text-align: center;
+    position:relative;
+    top: 6%;
+    left: 50%;
+    transform:translate(-50%, -50%);
+    justify-content: space-around;
+    align-items: center;
+    width: 70%;
+    align-content: center;
+    background: #fff;
+    box-shadow: 0px 0px 30px -30px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    padding: 20px 0;
+    margin-bottom: 10px;
+}
+
+/* Style for Radio - button settings */
+.calories .calories-cal .container .row .col-md-6 .left-data .gender .container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-top: 7px;
+    cursor: pointer;
+    font-size: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+  
+/* Hide the browser's default radio button */
+.calories .calories-cal .container .row .col-md-6 .left-data .gender .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+/* Create a custom radio button - select button for male or female */
+.calories .calories-cal .container .row .col-md-6 .left-data .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    margin-left: 40px;
+    margin-top: 2px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+  
+/* On mouse-over, add a grey background color */
+.calories .calories-cal .container .row .col-md-6 .left-data .gender .container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+  
+/* When the radio button is checked, add a blue background */
+.calories .calories-cal .container .row .col-md-6 .left-data .gender .container input:checked ~ .checkmark {
+    background-color: #4e691a;
+}
+  
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.calories .calories-cal .container .row .col-md-6 .left-data .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+/* Show the indicator (dot/circle) when checked */
+.calories .calories-cal .container .row .col-md-6 .left-data .gender .container input:checked ~ .checkmark:after {
+    display: block;
+}
+  
+/* Style the indicator (dot/circle) */
+.calories .calories-cal .container .row .col-md-6 .left-data .gender .container .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+/* Headings for each input Activity level, age, etc..... */
+.calories .calories-cal .container .row .col-md-6 .left-data h5{
+    font-weight: bold; font-size: 16px;
+}
+
+/* Input settings - size of font etc..... */
+.calories .calories-cal .container .row .col-md-6 .left-data input{
+    background-color: #fff; border-radius: 12px; padding: 10px 0; margin-bottom: 10px; color: #00203fff;  border-bottom: 1px solid #4e691a; text-align: center; font-size: 25px;
+} 
+
+/* Select your body type settings - weight loss*/
+.bodytypes .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
+    gap:1.5rem;
+}
+
+.bodytypes .box-container .box{
+    padding:3rem 2rem;
+    border-radius: .5rem;
+    background:#c9f5d9;
+    box-shadow: var(--box-shadow);
+    outline:var(--outline);
+    outline-offset: -1rem;
+    text-align: center;
+}
+
+.bodytypes .box-container .box:hover{
+    outline:var(--outline-hover);
+    outline-offset: 0rem;
+}
+
+.bodytypes .box-container .box img{
+    margin:1rem 0;
+    height:15rem;
+}
+
+.bodytypes .box-container .box h3{
+   font-size: 2rem;
+   color:var(--dark-blue);
+   line-height: 1.8;
+}
+
+.bodytypes .box-container .box p{
+    font-size: 1.7rem;
+    color:var(--dark-blue);
+    line-height: 1.8;
+    padding:1rem 0;
+}
+
+/*Stay lean box*/
+.bodytypes .box-container .box1{
+    padding:3rem 2rem;
+    border-radius: .5rem;
+    background:#b6d4ae;
+    box-shadow: var(--box-shadow);
+    outline:var(--outline);
+    outline-offset: -1rem;
+    text-align: center;
+}
+
+.bodytypes .box-container .box1:hover{
+    outline:var(--outline-hover);
+    outline-offset: 0rem;
+}
+
+.bodytypes .box-container .box1 img{
+    margin:1rem 0;
+    height:15rem;
+}
+
+.bodytypes .box-container .box1 h3{
+   font-size: 2rem;
+   color:var(--dark-blue);
+   line-height: 1.8;
+}
+
+.bodytypes .box-container .box1 p{
+    font-size: 1.7rem;
+    color:var(--dark-blue);
+    line-height: 1.8;
+    padding:1rem 0;
+}
+
+/*Bulk section*/
+.bodytypes .box-container .box2{
+    padding:3rem 2rem;
+    border-radius: .5rem;
+    background:#7cb896;
+    box-shadow: var(--box-shadow);
+    outline:var(--outline);
+    outline-offset: -1rem;
+    text-align: center;
+}
+
+.bodytypes .box-container .box2:hover{
+    outline:var(--outline-hover);
+    outline-offset: 0rem;
+}
+
+.bodytypes .box-container .box2 img{
+    margin:1rem 0;
+    height:15rem;
+}
+
+.bodytypes .box-container .box2 h3{
+   font-size: 2rem;
+   color:var(--dark-blue);
+   line-height: 1.8;
+}
+
+.bodytypes .box-container .box2 p{
+    font-size: 1.7rem;
+    color:var(--dark-blue);
+    line-height: 1.8;
+    padding:1rem 0;
+}
+
+/* Responsive media */
+@media (max-width: 700px){
+    .box {
+        width: 380px;
+    }
+    .input label {
+        font-size: 18px;
+    }
+    .inputH label, .inputW label {
+        font-size: 14px;
+    }
+    .input input, .inputH input, .inputW input{
+        font-size: 24px;
+    }
+    .modal-content {
+      width: 380px;
+    }
+}

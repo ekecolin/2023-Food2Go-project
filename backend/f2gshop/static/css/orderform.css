@@ -1,0 +1,449 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+
+:root{
+    --black:#130f40;
+    --mint: #adefd1ff;
+    --dark-green:#4e691a;
+    --dark-blue:#00203fff ;
+    --box-shadow:0 .5rem 1.5rem rgba(0,0,0,.1);
+    --border:.2rem solid rgba(0,0,0,.1);
+    --outline:.1rem solid rgba(0,0,0,.1);
+    --outline-hover:.2rem solid var(--black);
+}
+
+*{
+    font-family: 'Poppins', sans-serif;
+    margin:0; padding:0;
+    box-sizing: border-box;
+    outline: none; border:none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: all .2s linear;
+}
+
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scroll-padding-top: 7rem;
+}
+
+/*Middle body of homepage*/
+body{
+    background:var(--mint);
+}
+
+section{
+    padding:2rem 9%;
+}
+
+/*Heading before ribboned text*/
+.heading{
+    text-align: center;
+    padding:2rem 0;
+    padding-bottom: 3rem;
+    font-size: 3.5rem;
+    color:var(--dark-blue);
+}
+
+/*Ribboned text*/
+.heading span{
+    background: var(--dark-green);
+    color:#fff;
+    display: inline-block;
+    padding:.5rem 3rem;
+    clip-path: polygon(100% 0, 93% 50%, 100% 99%, 0% 100%, 7% 50%, 0% 0%);
+}
+
+/*All Buttons, borders underneath pictures and hover colour*/
+.btn{
+    margin-top: 1rem;
+    display: inline-block;
+    padding:.8rem 3rem;
+    font-size: 1.7rem;
+    border-radius: .5rem;
+    border:.2rem solid var(--dark-blue);
+    color:var(--dark-blue);
+    cursor: pointer;
+    background: none;
+}
+
+.btn:hover{
+    background:var(--dark-green);
+    color:#fff;
+}
+
+/*Very top heading - navbar section incl. logo, logo image, nav text and icons*/
+.header{
+    position: fixed;
+    top:0; left:0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:2rem 9%;
+    background:var(--mint);
+    box-shadow: var(--box-shadow);
+}
+
+.header .logo{
+    font-size: 2.5rem;
+    font-weight: bolder;
+    color:var(--dark-blue);
+}
+
+.header .logo i{
+    color:var(--dark-green);
+}
+
+.header .navbar a{
+    font-size: 1.7rem;
+    font-weight: bolder;
+    margin:0 1rem;
+    color:var(--dark-blue);
+}
+
+.header .navbar a:hover{
+    color:var(--dark-green);
+}
+
+.header .icons div{
+    height: 4.5rem;
+    width: 4.5rem;
+    line-height: 4.5rem;
+    border-radius: .5rem;
+    background: var(--mint);
+    color:var(--dark-blue);
+    font-size: 2rem;
+    margin-left: .3rem;
+    cursor: pointer;
+    text-align: center;
+}
+
+.header .icons div:hover{
+    background: var(--dark-green);
+    color:#fff;
+}
+
+#menu-btn{
+    display: none;
+}
+
+/* Shopping cart icon settings*/
+.header .shopping-cart{
+    position: absolute;
+    top:110%; right:-110%;
+    padding:1rem;
+    border-radius: .5rem;
+    box-shadow: var(--box-shadow);
+    width:35rem;
+    background: #fff;
+}
+
+.header .shopping-cart.active{
+    right:2rem;
+    transition: .4s linear;
+}
+
+/* user icon settings */
+.header .login-form{
+    position: absolute;
+    top:110%; right:-110%;
+    width:35rem;
+    box-shadow: var(--box-shadow);
+    padding:2rem;
+    border-radius: .5rem;
+    background: #fff;
+    text-align: center;
+}
+
+.header .login-form.active{
+    right:2rem;
+    transition: .4s linear;
+}
+
+/* Our heading including title, subtitle, links to other pages and settings */
+.home{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-position: center;
+    background-size: cover;
+    padding-top: 17rem;
+    padding-bottom: 10rem;
+}
+
+.home .content{
+    text-align: center;
+    width:80rem;
+}
+
+.home .content h3{
+    color:var(--dark-blue);
+    font-size: 7rem;
+}
+
+.home .content h3 span{
+    color:var(--dark-green);
+}
+
+.home .content p{
+    color:var(--dark-blue);
+    font-size: 1.7rem;
+    padding:1rem 0;
+    line-height: 1.8;
+}
+
+/* Positions our food items + details */
+.item {
+  padding: 20px 30px;
+  height: 120px;
+  display: flex;
+}
+
+/* Trash icon settings*/
+.buttons {
+  position: relative;
+  padding-top: 30px;
+  margin-right: 60px;
+}
+
+/* Product Image */
+.image {
+  margin-right: 50px;
+  margin-top: -5px;
+}
+
+/* Product Name + its settings */
+.description {
+  padding-top: 10px;
+  margin-right: 60px;
+  width: 115px;
+}
+
+.description span {
+  display: block;
+  font-size: 14px;
+}
+
+/* Product Quantity */
+.quantity {
+  padding-top: 20px;
+  margin-right: 60px;
+}
+
+.item .buttons {
+  width: 32px;
+  height: 32px;
+  font-size: 20px;
+  line-height: 20px;
+  margin-left: 30px;
+}
+
+.buttons i {
+  color: #00203fff;
+}
+
+button[class*=btn] {
+  width: 30px;
+  height: 30px;
+  background-color: #E1E8EE;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+button:focus,
+input:focus {
+  outline:0;
+}
+
+/* Total Price */
+.total-price {
+    width: 83px;
+    padding-top: 27px;
+    text-align: center;
+    font-size: 16px;
+    color: #00203fff;
+    font-weight: 300;
+  }
+
+/* Responsive media*/
+@media (max-width: 800px) {
+  .item {
+    height: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .image img {
+    width: 50%;
+  }
+  .image,
+  .quantity,
+  .description {
+    width: 100%;
+    text-align: center;
+    margin: 6px 0;
+  }
+  .buttons {
+    margin-right: 20px;
+  }
+}
+
+/*Arrow to scroll up automatically*/
+.gotopbtn{
+    position: fixed;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background: var(--dark-green);
+    bottom: 40px;
+    right: 50px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 50px;
+    color: white;
+    font-size: 22px;
+}
+
+/*Footer section*/
+.footer .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap:1.5rem;
+}
+
+.footer .box-container .box h3{
+    font-size: 2.5rem;
+    color:var(--dark-blue);
+    padding:1rem 0;
+}
+
+.footer .box-container .box h3 i{
+    color: var(--dark-green);
+}
+
+.footer .box-container .box .links{
+    display: block;
+    font-size: 1.5rem;
+    color:var(--dark-blue);
+    padding:1rem 0;
+}
+
+.footer .box-container .box .links i{
+    color:var(--dark-green);
+    padding-right: .5rem;
+}
+
+.footer .box-container .box .links:hover i{
+    padding-right: 2rem;
+}
+
+.footer .box-container .box p{
+    line-height: 1.8;
+    font-size: 1.5rem;
+    color:var(--dark-blue);
+    padding:1rem 0;
+}
+
+.footer .box-container .box .share a{
+    height:4rem;
+    width:4rem;
+    line-height:4rem;
+    border-radius: .5rem;
+    font-size: 2rem;
+    color:var(--dark-blue);
+    margin-right: .2rem;
+    background: var(--mint);
+    text-align: center;
+}
+
+.footer .box-container .box .share a:hover{
+    background: var(--dark-green);
+    color: #fff;
+}
+
+.footer .box-container .box .email{
+    width: 100%;
+    margin:.7rem 0;
+    padding:1rem;
+    border-radius: .5rem;
+    background: white;
+    font-size: 1.6rem;
+    color:var(--black);
+    text-transform: none;
+}
+
+.footer .box-container .box .payment-img{
+    margin-top: 2rem;
+    height: 3rem;
+    display: block;
+}
+
+.footer .credit{
+    text-align: center;
+    margin-top: 2rem;
+    padding:1rem;
+    padding-top: 2.5rem;
+    font-size: 2rem;
+    color:var(--dark-blue);
+    border-top: var(--border);
+}
+
+.footer .credit span{
+    color:var(--dark-green);
+}
+
+/* Responsive queries  */
+@media (max-width:991px){
+    html{
+        font-size: 55%;
+    }
+    .header{
+        padding:2rem;
+    }
+    section{
+        padding:2rem;
+    }
+}
+
+@media (max-width:768px){
+    #menu-btn{
+        display: inline-block;
+    }
+    .header .search-form{
+        width:90%;
+    }
+    .header .navbar{
+        position: absolute;
+        top:110%; right:-110%;
+        width:30rem;
+        box-shadow: var(--box-shadow);
+        border-radius: .5rem;
+        background: #fff;
+    }
+    .header .navbar.active{
+        right:2rem;
+        transition: .4s linear;
+    }
+    .header .navbar a{
+        font-size: 2rem;
+        margin:2rem 2.5rem;
+        display: block;
+    }
+}
+
+@media (max-width:450px){
+    html{
+        font-size: 50%;
+    }
+    .heading{
+        font-size: 2.5rem;
+    }
+    .footer{
+        text-align: center;
+    }
+    .footer .box-container .box .payment-img{
+        margin: 2rem auto;
+    }
+}

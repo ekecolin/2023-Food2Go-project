@@ -1,0 +1,496 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk | Food2Go</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <script src="https://kit.fontawesome.com/c0294546ca.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'css/bodytype.css' %}">
+</head>
+<body>
+    
+    <!-- header section starts -->
+    <header class="header">
+
+        <a href="/" class="logo"><i class="fas fa-shipping-fast"></i>Food2Go</a>
+
+        <nav class="navbar">
+            <a href="/">home</a>
+            <a href="ourmenu">our menu</a>
+            <a href="#features">bulk info</a>
+            <a href="#foods">foods</a>
+            <a href="#products">Recommendations</a>
+            <a href="#popmeals">Popular</a>
+            <a href="#review">reviews</a>
+            <a href="/chart">Weight tracker</a>
+        </nav>
+
+        <div class="icons">
+            <div class="fas fa-bars" id="menu-btn"></div>
+            <div class="fas fa-shopping-cart" id="cart-btn"></div>
+            <div class="fas fa-user" id="login-btn"></div>
+        </div>
+
+        <!-- Shopping basket section, if logged in you can add to basket and view + if your not logged in you cant view the basket -->
+        <div class="shopping-cart">
+            <form action="" class="login-form1">
+                {% if user.is_authenticated %}
+                {% if empty %}
+                  <h2 style="font-weight:bold; font-size:5rem;">Your shopping basket is empty.</h2>
+                  <p style="font-weight:bold">Lets add some meals to your basket</p>
+                  <a href="/ourmenu" class="btn">Our menu</a>
+                {% else %}
+                  <div class="nav-item">
+                    <a class = "nav-link" class="btn" href = "/basket" style="font-weight: bold; font-size: 16px; text-align: center; display: flex; justify-content: center; align-items: center;">Shopping basket</a>
+                  </div>
+                {% endif %}
+              {% else %}
+                <a class = "nav-link" class="btn" href = "/login" style="font-weight: bold; font-size: 16px; text-align: center; display: flex; justify-content: center; align-items: center;">Login to use basket</a>
+              {% endif %}
+            </form>
+        </div>
+
+        <!-- User icon - allows user to login. register and logout -->
+        <form action="" class="login-form">
+            <div class="nav-item">
+            {% if user.is_authenticated %}
+                <a class = "nav-link" class="btn" href = "/logout" style="font-weight: bold; font-size: 16px;">Logout</a>
+            {% else %}
+                <a class = "nav-link" class="btn" href = "/login" style="font-weight: bold; font-size: 16px;">Login</a>
+                <a class = "nav-link" class="btn" href = "/register" style="font-weight: bold; font-size: 16px;">Register</a>
+            {% endif %}
+            </div>
+        </form>
+
+    </header>
+    <!-- header section ends -->
+
+    <!-- home section starts  -->
+    <section class="home" id="home">
+
+        <div class="content">
+            <h3>Bulking <span>Season</span></h3>
+            <p><span style="font-weight:bold">Commit to be strong</span></p>
+            <a href="/basket" class="btn">Your basket</a>
+        </div>
+
+    </section>
+    <!-- home section ends -->
+
+    <!-- Bulking information starts -->
+    <section class="features" id="features">
+
+        <h1 class="heading"> Bulking <span>Information</span> </h1>
+
+        <div class="box-container">
+
+            <div class="box">
+                <img src="{% static 'img/bulking1.png' %}" alt="What is bulking">
+                <button type="button" class="bodybtn3" onclick="openPopup()"><p><span style="font-weight:bold">What is bulking?</span></p></button>
+                <div class="popup" id="popup">
+                    <h2>What is bulking?</h2>
+                    <p>Bulking is the progressive increase in the number of calories consumed beyond your body’s 
+                    needs in combination with intense weight training. Bulking is the muscle-gaining phase.</p>
+                    <button type="button" class="btn" onclick="closePopup()">OK</button>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="{% static 'img/bulking2.png' %}" alt="How to bulk">
+                <button type="button" class="bodybtn3" onclick="openPopup1()"><p><span style="font-weight:bold">How to start bulking?</span></p></button>
+                <div class="popup1" id="popup1">
+                    <h2>How to bulk?</h2>
+                    <ul style="list-style-type: none">
+                        <li>1. Eat at a caloric surplus.</li>
+                        <li>2. Eat moderate protein and fat, and a substantial amount of carbs.</li>
+                        <li>3. Lift heavy and focus on a moderate rep-range.</li>
+                        <li>4. Eat at a caloric surplus.</li>
+                        <li>5. Avoid “dirty bulking” to avoid excess fat gain.</li>
+                    </ul>
+                    <button type="button" class="btn" onclick="closePopup1()">OK</button>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="{% static 'img/bulking3.png' %}" alt="Tips to help">
+                <button type="button" class="bodybtn3" onclick="openPopup2()"><p><span style="font-weight:bold">Tips to help</span></p></button>
+                <div class="popup2" id="popup2">
+                    <h2>Some Tips for a successful bulk</h2>
+                    <ul style="list-style-type: none">
+                        <li>1. Prioritize More Carbs to Fuel Hard Training.</li>
+                        <li>2. Tailor your training for bulking.</li>
+                        <li>3. Recover properly.</li>
+                        <li>4. Get Enough Sleep.</li>
+                        <li>5. Eat Enough Protein.</li>
+                    </ul>
+                    <button type="button" class="btn" onclick="closePopup2()">OK</button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- Bulking information ends -->
+
+    <!-- Breakfast meal options starts-->
+    <section class="foods" id="foods">
+
+        <h1 class="heading"> our <span>Breakfast</span> </h1>
+
+        <div class="box-container">
+
+            <div class="box2">
+                <a href="/products/9"><img src="{% static 'img/breakfast_wrap.png' %}" alt="Early Risers Burrito"></a>
+                <h3>early risers burrito</h3>
+                <p>A high protein rich early morning simple breakfast.</p>
+                <a href="/products/9" class="btn">read more</a>
+                <a href="addbasket/{{9}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box2">
+                <a href="/products/10"><img src="{% static 'img/Wholegrain-Avocado-Toast-with-Sunny-Side-Up.png' %}" alt="Avocado Toast"></a>
+                <h3>Avocado Toast </h3>
+                <p>A delicious treat. Avocado toast with sunny-side up.</p>
+                <a href="/products/10" class="btn">read more</a>
+                <a href="addbasket/{{10}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box2">
+                <a href="/products/11"><img src="{% static 'img/Creamy-Oatmeal-Porridge-with-Banana-and-Peanut-Butter.png' %}" alt="Creamy Porridge"></a>
+                <h3>Creamy Porridge</h3>
+                <p>The perfect muscle mass gainer breakfast to start the day.</p>
+                <a href="/products/11" class="btn">read more</a>
+                <a href="addbasket/{{11}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box2">
+                <a href="/products/12"><img src="{% static 'img/Spicy-Tofu-Scramble.png' %}" alt="Spicy Tofu Scramble"></a>
+                <h3>Spicy Tofu Scramble</h3>
+                <p>A protein-rich, vegan breakfast option for weight gain.</p>
+                <a href="/products/12" class="btn">read more</a>
+                <a href="addbasket/{{12}}" class="btn">add to cart</a>
+            </div>
+            
+        </div>
+
+    </section>
+    <!-- Breakfast meal options ends-->
+
+    <!--Lunch meal options starts-->
+    <section class="foods" id="foods">
+
+        <h1 class="heading"> our <span>Lunch</span> </h1>
+
+        <div class="box-container">
+
+            <div class="box2">
+                <a href="/products/21"><img src="{% static 'img/Pesto-Grilled-Cheese.png' %}" alt="Pesto Grilled Cheese"></a>
+                <h3>Pesto Grilled Cheese</h3>
+                <p>Want to ramp up your grilled cheese game? Give this Pesto Grilled Cheese a try.</p>
+                <a href="/products/21" class="btn">read more</a>
+                <a href="addbasket/{{21}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box2">
+                <a href="/products/22"><img src="{% static 'img/Loaded_Burger_Bowl.png' %}" alt="Loaded Burger Bowl"></a>
+                <h3>Loaded Burger Bowl</h3>
+                <p>There’s nicely browned ground beef, pickles, bacon, lettuce, red onions, and tomatoes.</p>
+                <a href="/products/22" class="btn">read more</a>
+                <a href="addbasket/{{22}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box2">
+                <a href="/products/23"><img src="{% static 'img/Thai_Noodle_Bowl.png' %}" alt="Thai Noodle Bowl"></a>
+                <h3>Thai Noodle Bowl</h3>
+                <p>Perfectly cooked noodles are drenched in a sweet, savory, and nutty homemade sauce.</p>
+                <a href="/products/23" class="btn">read more</a>
+                <a href="addbasket/{{23}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box2">
+                <a href="/products/24"><img src="{% static 'img/chicken-Shawarma-Salad.png' %}" alt="Chicken Shawarma"></a>
+                <h3>Chicken Shawarma</h3>
+                <p>Salad packed with flavor, from the juicy chicken to the tangy tahini dressing.</p>
+                <a href="/products/24" class="btn">read more</a>
+                <a href="addbasket/{{24}}" class="btn">add to cart</a>
+            </div>
+            
+        </div>
+
+    </section>
+    <!--Lunch meal options ends-->
+
+    <!--Dinner meal options starts-->
+    <section class="foods" id="foods">
+
+        <h1 class="heading"> our <span>Dinner</span> </h1>
+
+        <div class="box-container">
+
+            <div class="box2">
+                <a href="/products/33"><img src="{% static 'img/steak-bowl.png' %}" alt="Steak And Bean Burrito Bowl"></a>
+                <h3>Steak and Bean Burrito Bowl</h3>
+                <p>A Flavourful, Nutritional, Delicious protein hitting bowl.</p>
+                <a href="/products/33" class="btn">read more</a>
+                <a href="addbasket/{{33}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box2">
+                <a href="/products/34"><img src="{% static 'img/appleporkchops.png' %}" alt="Apple & Onion Pork Chops"></a>
+                <h3>Apple & Onion Pork Chops</h3>
+                <p>Topped with a sweet, cinnamon-y apple and onion topping.</p>
+                <a href="/products/34" class="btn">read more</a>
+                <a href="addbasket/{{34}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box2">
+                <a href="/products/35"><img src="{% static 'img/Buffalo-Chicken-Mac-Cheese.png' %}" alt="Chicken Mac & Cheese"></a>
+                <h3>Buffalo Chicken Mac & Cheese</h3>
+                <p>with macaroni. Rich, creamy and flavourful.</p>
+                <a href="/products/35" class="btn">read more</a>
+                <a href="addbasket/{{35}}" class="btn">add to cart</a>
+            </div>
+
+            <div class="box2">
+                <a href="products/36"><img src="{% static 'img/Swedish-Meatballs.png' %}" alt="Sweet Swedish Meatballs"></a>
+                <h3>Sweet Southern Swedish Meatballs</h3>
+                <p>with parsnips and a creamy cauliflower mash.</p>
+                <a href="products/36" class="btn">read more</a>
+                <a href="addbasket/{{36}}" class="btn">add to cart</a>
+            </div>
+            
+        </div>
+
+    </section>
+    <!--Dinner meal options ends-->
+
+    <!-- Food recommendations starts-->
+    <section class="foods" id="foods" style="margin-top: 50px">
+
+        <h1 class="heading"> our <span>Recommmendations</span> </h1>
+    
+        <div class="box-container">
+            {% for p in recommendations %}
+            <div class="box2">
+                <a href="/products/{{p.id}}"><img src="{{p.image.url}}" alt="{{p.name}}"></a>
+                <h3>{{p.name}}</h3>
+                <div class="stars"></div>
+                <a href="/products/{{p.id}}" class="btn">read more</a>
+                <a href="/addbasket/{{p.id}}" class="btn">add to cart</a>
+            </div>
+            {% endfor %}
+    
+        </div>
+    
+    </section>
+    <!-- Food recommendations ends-->
+
+    <!-- Javascript that produces the starts for the recommneded products starts -->
+    <script>
+        function generateStars() {
+            const fullStars = Math.floor(Math.random() * 2) + 3; // Generates a random number between 3 and 4
+            const hasHalfStar = Math.random() < 0.5; // 50% chance of having a half star
+            
+            const containers = document.querySelectorAll('.stars');
+            
+            for (let i = 0; i < containers.length; i++) { // function then iterates over each container using a for loop.
+                const container = containers[i];
+                container.innerHTML = ''; // Clear any existing stars
+                
+                for (let j = 0; j < fullStars; j++) { //  adds a number of full stars to the container using another for loop, based on the random number generated earlier.
+                    const star = document.createElement('i');
+                    star.classList.add('fas', 'fa-star');
+                    container.appendChild(star);
+                }
+                
+                if (hasHalfStar) {
+                    const halfStar = document.createElement('i');
+                    halfStar.classList.add('fas', 'fa-star-half-alt');
+                    container.appendChild(halfStar);
+                }
+            }
+        }
+        
+        window.addEventListener('load', generateStars); // used to run the generateStars() function when the page finishes loading.
+    </script>
+    <!-- Javascript that produces the starts for the recommneded products ends -->
+    
+    <!-- Most popular meals starts -->
+    <section class="popmeals" id="popmeals">
+
+        <h1 class="heading"> Most Popular <span>Meals</span> </h1>
+
+        <div class="popmealscontainer">
+            <div class="popmealsbox">
+                <div class="popimg">
+                    <a href="/products/21"><img src="{% static 'img/Pesto-Grilled-Cheese.png' %}" alt="Pesto Grilled Cheese"></a>
+                </div>
+                <h3>Pesto Grilled Cheese</h3>
+                <h2>€5.00</h2>
+            </div>
+
+            <div class="popmealsbox">
+                <div class="popimg">
+                    <a href="/products/34"><img src="{% static 'img/appleporkchops.png' %}" alt="Apple & Onion Pork Chops"></a>
+                </div>
+                <h3>Apple & Onion Pork Chops</h3>
+                <h2>€5.00</h2>
+            </div>
+
+            <div class="popmealsbox">
+                <div class="popimg">
+                    <a href="/products/9"><img src="{% static 'img/breakfast_wrap.png' %}" alt="Early Risers Burrito"></a>
+                </div>
+                <h3>Early Risers Burrito</h3>
+                <h2>€5.00</h2>
+            </div>
+
+            <div class="popmealsbox">
+                <div class="popimg">
+                    <a href="/products/33"><img src="{% static 'img/steak-bowl.png' %}" alt="Steak And Bean Burrito Bowl"></a>
+                </div>
+                <h3>Steak And Bean Burrito Bowl</h3>
+                <h2>€5.00</h2>
+            </div>
+            
+        </div>
+
+    </section>
+    <!-- Most popular meals ends -->
+
+    <!-- Customer reviews starts-->
+    <section class="review" id="review">
+        
+        <h1 class="heading"> customer <span>reviews</span> </h1>
+        
+        <div class="swiper review-slider">
+            
+            <div class="swiper-wrapper">
+                
+                <div class="swiper-slide box">
+                    <img src="{% static 'img/bulkpic1.png' %}" alt="Picture of Harry">
+                    <p>Super fast delivery and great service. I love the all meals available so far but my favorite is the pesto grilled cheese.</p>
+                    <h3>Harry Jones</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'img/bulkpic2.png' %}" alt="Picture of Kathleen">
+                    <p>The meals are made really nice. The delivery is great and it comes on time. My husband and I are a big fan of Food2Go.</p>
+                    <h3>Kathleen Jones</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'img/bulkpic3.png' %}" alt="Picture of Rafa">
+                    <p>First time ordering my meals and they were delicius while providing me with the nutrients I needed to reach my desired goal.</p>
+                    <h3>Rafa Silva</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'img/pic-4.png' %}" alt="Picture of Lily">
+                    <p>This site is really neat. I love the food and service. Highly recommended them to anyone who is looking for meals prepared.</p>
+                    <h3>Lily Johnson</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-- Customer reviews ends -->
+
+    <!-- footer section starts -->
+    <section class="footer">
+
+        <div class="box-container">
+
+            <div class="box">
+                <h3> <i class="fas fa-shipping-fast"></i> Food2Go </h3>
+                <p>“It Is Health That Is Real Wealth And Not Pieces Of Gold And Silver.” – Mahatma Gandhi.</p>
+                <div class="share">
+                    <a href="https://www.facebook.com/" class="fab fa-facebook-f"></a>
+                    <a href="https://twitter.com/" class="fab fa-twitter"></a>
+                    <a href="https://www.instagram.com/" class="fab fa-instagram"></a>
+                    <a href="https://ie.linkedin.com/" class="fab fa-linkedin"></a>
+                </div>
+            </div>
+
+            <div class="box">
+                <h3>contact info</h3>
+                <a href="#" onclick="return false;" class="links"> <i class="fas fa-phone"></i> +123-456-7890 </a>
+                <a href="#" onclick="return false;" class="links"> <i class="fas fa-phone"></i> +111-222-3333 </a>
+                <a href="https://mail.google.com/mail/u/0/#inbox" class="links"> <i class="fas fa-envelope"></i> colin.ekedigwe2@mail.dcu.ie </a>
+                <a href="https://mail.google.com/mail/u/0/#inbox" class="links"> <i class="fas fa-envelope"></i> gideon.amaechi2@mail.dcu.ie </a>
+                <a href="https://www.google.com/maps/place/North+City,+Dublin+1,+D01+P767/@53.3503011,-6.2562243,15z/data=!3m1!4b1!4m5!3m4!1s0x48670e85f02ee71d:0x9f56abb85cd807b7!8m2!3d53.3503017!4d-6.2562243" class="links"> <i class="fas fa-map-marker-alt"></i> dublin, ireland - D01P767 </a>
+            </div>
+
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="/" class="links"> <i class="fas fa-arrow-right"></i> home </a>
+                <a href="ourmenu" class="links"> <i class="fas fa-arrow-right"></i> our menu </a>
+                <a href="#features" class="links"> <i class="fas fa-arrow-right"></i> bulk info </a>
+                <a href="#foods" class="links"> <i class="fas fa-arrow-right"></i> foods </a>
+                <a href="#products" class="links"> <i class="fas fa-arrow-right"></i> recommendations </a>
+                <a href="#popmeals" class="links"> <i class="fas fa-arrow-right"></i> popular </a>
+                <a href="#review" class="links"> <i class="fas fa-arrow-right"></i> review </a>
+                <a href="chart" class="links"> <i class="fas fa-arrow-right"></i> Weight tracker</a>
+            </div>
+
+            <div class="box">
+                <h3>payments</h3>
+                <img src="{% static 'img/payment.png' %}" class="payment-img" alt="Payment">
+            </div>
+
+        </div>
+
+        <div class="credit"> created by <span> Colin Ekedigwe & Gideon Amaechi </span> | 20403046 & 20364806 </div>
+
+    </section>
+    <!-- footer section ends -->
+
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+    <!-- custom js file link  -->
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/bodytype.js' %}"></script>
+
+    <!-- Arrow that leads you back =to the top of the page -->
+    <a class="gotopbtn" href="#"> <i class="fas fa-arrow-up"></i> </a>
+
+</body>
+</html>
